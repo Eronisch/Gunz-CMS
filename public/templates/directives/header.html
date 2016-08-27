@@ -1,0 +1,48 @@
+<div class="navbar navbar-inverse container">
+    <div class="navbar-inner">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div id="navCollapse" class="nav-collapse collapse">
+            <div class="menu-main-container">
+                <ul class="nav">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li ng-if="!isLoggedIn">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li ng-if="!isLoggedIn">
+                        <a href="/register">Register</a>
+                    </li>
+                    <li>
+                        <a href="/download">Download</a>
+                    </li>
+                    <li>
+                        <a href="/individualranking">Player ranking</a>
+                    </li>
+                    <li>
+                        <a href="/clanranking">Clan ranking</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fa fa-caret-down"></i> Donate</a>
+                        <ul class="sub-menu dropdown-menu">
+                            <li><a href="/donate">Donate</a></li>
+                            <li><a href="/shop">Shop</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://www.gunzfactor.com/forum.php" target="_blank">Community</a>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="isLoggedIn" id="accountHeading" class="nav pull-right">
+                <i class="fa fa-user"></i> <span id="welcome">Welcome, {{userName}}</span>
+            </div>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <!-- /.navbar-inner -->
+</div>

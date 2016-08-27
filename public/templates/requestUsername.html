@@ -1,0 +1,45 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+    <div ng-show="request.isSubmitted && request.status != null">
+        <div ng-show="request.status === 0"  class="alert alert-danger">
+            There is no account with the given e-mail.
+        </div>
+        <div ng-show="request.status === 1" class="alert alert-danger">
+            You've given an invalid captcha.
+        </div>
+        <div ng-show="request.status === 2" class="alert alert-danger">
+            We couldn't send your username because of mail issues, please try again later.
+        </div>
+        <div ng-show="request.status === 3" class="alert alert-success">
+            Your username has been send to your e-mail.
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Request username</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <form ng-submit="requestUsername()">
+                        <div class="control-group">
+                            <label>Email</label>
+                            <input type="email" ng-model="request.email" required/>
+                        </div>
+                        <div class="control-group">
+                            <label>Captcha</label>
+                            <div vc-recaptcha key="'6Lf3FBATAAAAAC7QArA2xTBURkOmuuJofaSy797A'"></div>
+                        </div>
+                        <input type="submit" value="Request username" class="button-small" ng-disabled="request.isLoading"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <account></account>
+        </div>
+    </div>
+</div>

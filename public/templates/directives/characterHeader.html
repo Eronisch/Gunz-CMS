@@ -1,0 +1,59 @@
+﻿<div id="characterHeader" class="hidden-phone">
+    <i id="editHeader" ng-if="isOwner" ng-click="openHeaderModal()" class="fa fa-edit"></i>
+    <div id="avatar">
+        <div id="innerAvatar">
+            <img ng-src="{{character.AvatarUrl}}" alt="Avatar" />
+
+            <p id="name">{{character.Name}}</p>
+        </div>
+
+        <i ng-if="isOwner" id="editAvatar" ng-click="openAvatarModal()" class="fa fa-edit"></i>
+    </div>
+
+    <div id="friends" class="blackGradient">
+        <i class="fa fa-group"></i> {{amountFriends}} {{amountFriends === 1 ? 'Friend' : 'Friends' }}
+    </div>
+
+    <img id="background" ng-src="{{character.HeaderUrl ? character.HeaderUrl : '/img/clanHeader2.png'}}" alt="Background" />
+
+    <ul class="customTabs">
+        <li class="blackGradient" ng-class="{active : tab === 'home'}"><a ng-href="/character/view/{{character.Cid}}"><i class="fa fa-user"></i> Profile</a></li>
+        <li class="blackGradient" ng-class="{active : tab === 'friends'}"><a ng-href="/character/view/{{character.Cid}}/friends"><i class="fa fa-group"></i> Friends</a></li>
+    <!--    <li class="blackGradient" ng-class="{active : tab === 'matches'}"><a ng-href="/character/view/{{character.Cid}}/matches"><i class="fa fa-bolt"></i> Matches</a></li>-->
+    </ul>
+
+    <modal id="editHeaderModal" title="Upload a new header">
+        <p>Please select an image to be your new header.</p>
+
+        <p>Once you have selected an image it will be validated and if the image seems to be okay it will be updated and immediatly visible.</p>
+        <input id="headerFile" type="file" on-file-upload-change="onHeaderChange" hidden />
+
+        <div ng-show="editHeaderInfo.isSubmitted && editHeaderInfo.imageStatus === imageStatus.TooLarge" class="alert alert-danger">
+            The image can't exceed 5MB.
+        </div>
+
+        <div ng-show="editHeaderInfo.isSubmitted && editHeaderInfo.imageStatus === imageStatus.InvalidImage" class="alert alert-danger">
+            You can only upload: PNG, JPG, JPEG, GIF.
+        </div>
+
+        <button ng-disabled="editHeaderInfo.isSubmitted" ng-click="selectHeader()" class="btn btn-default btn-small">Choose image</button>
+    </modal>
+
+    <modal id="editAvatarModal" title="Upload a new avatar">
+        <p>Please select an image to be your new avatar.</p>
+
+        <p>Once you have selected an image it will be validated and if the image seems to be okay it will be updated and immediatly visible.</p>
+
+        <input id="emblemFile" type="file" on-file-upload-change="onEmblemChange" hidden />
+
+        <div ng-show="editAvatarInfo.isSubmitted && editAvatarInfo.imageStatus == imageStatus.TooLarge" class="alert alert-danger">
+            The image can't exceed 2.5MB.
+        </div>
+
+        <div ng-show="editAvatarInfo.isSubmitted && editAvatarInfo.imageStatus == imageStatus.InvalidImage" class="alert alert-danger">
+            You can only upload: PNG, JPG, JPEG, GIF.
+        </div>
+
+        <button ng-disabled="editAvatarInfo.isSubmitted" ng-click="selectEmblem()" class="btn btn-default btn-small">Choose image</button>
+    </modal>
+</div>

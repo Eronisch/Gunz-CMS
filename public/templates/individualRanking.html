@@ -1,0 +1,73 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+
+    <div id="register" class="row">
+        <div class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Ranking</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+
+                    <input id="searchIndividualRanking" type="text" ng-change="search()" ng-model="searchText"
+                           placeholder="Name..."/>
+
+                    <div ng-show="!isLoaded" class="loadingWrapper">
+                        <div class="loadingGear"></div>
+                    </div>
+
+                    <div ng-show="isLoaded">
+                        <table class="table table-response table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Level</th>
+                                <th>EXP</th>
+                                <th>Kills</th>
+                                <th>Deaths</th>
+                                <th>K/d</th>
+                                <th>Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-if="players.length === 0">
+                                <td colspan="7">There are no players yet.</td>
+                            </tr>
+                            <tr ng-repeat="player in players">
+                                <td>
+                                    <span ng-if="5 > $index"><img ng-src="/img/ranks/{{$index + 1}}.png"/></span>
+                                    <span ng-if="$index > 4">{{$index + 1}}</span>
+                                </td>
+                                <td><a ng-href="/character/view/{{player.Cid}}">{{player.Name}}</a></td>
+                                <td>{{player.Level}}</td>
+                                <td>{{player.Xp}}</td>
+                                <td>{{player.KillCount}}</td>
+                                <td>{{player.DeathCount}}</td>
+                                <td>{{player.Kd}}%</td>
+                                <td>{{player.PlayTime}} hours</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <div class="viewing pull-left">
+                                Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amount}}
+                            </div>
+
+                            <div class="pagination pull-right"></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span4">
+            <account></account>
+        </div>
+    </div>
+</div>

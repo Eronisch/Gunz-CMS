@@ -1,0 +1,22 @@
+#clanMembers #removeSelected{
+    margin-top: 15px;
+}
+
+#clanMembers .leader {
+    color: #3B5998;
+    font-weight: bold;
+}
+
+#clanMembers .admin{
+    color: green;
+    font-weight: bold;
+}
+
+#clanMembers .table img {
+    height: 25px;
+    width: auto;
+}
+
+#clanMembers .table .fa {
+        font-size: 11px;
+}

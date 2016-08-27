@@ -1,0 +1,487 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminShop" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Admin administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+
+            <div id="actions">
+                <button class="button-extrasmall pull-right" ng-click="openAddSetModel()">Add set</button>
+                <button class="button-extrasmall pull-right" ng-click="openAddCategoryModal()">Add Category</button>
+                <button class="button-extrasmall pull-right" ng-click="openAddItemModal()">Add Item</button>
+                <div class="clear"></div>
+            </div>
+
+            <div class="block_tabs ui-tabs">
+                <ul class="nav-tabs ui-tabs-nav">
+                    <li ng-click="navigateToTab(TAB_NAVIGATION_TYPES.items)" ng-class="{'ui-state-active' : activeTab === TAB_NAVIGATION_TYPES.items}"><a>Items</a></li>
+                    <li ng-click="navigateToTab(TAB_NAVIGATION_TYPES.categories)" ng-class="{'ui-state-active' : activeTab === TAB_NAVIGATION_TYPES.categories}"><a>Categories</a></li>
+                    <li ng-click="navigateToTab(TAB_NAVIGATION_TYPES.sets)" ng-class="{'ui-state-active' : activeTab === TAB_NAVIGATION_TYPES.sets}"><a>Sets</a></li>
+                </ul>
+
+                <div ng-class="{show : activeTab === TAB_NAVIGATION_TYPES.items}" class="tab tab-content widget">
+                    <input type="text" class="form-control" placeholder="Name..." ng-model="donatorItems.searchText"
+                           ng-change="searchItems()"/>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>ItemId</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in donatorItems.items">
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Description}}</td>
+                            <td>{{item.DonatorShopCategory.Name}}</td>
+                            <td>{{item.ItemId}}</td>
+                            <td>
+                                <button class="btn btn-default btn-xs" ng-click="editItem(item)">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs" ng-click="showConfirmDeleteItem(item)">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <div class="viewing pull-left">
+                            Viewing {{donatorItems.viewingMinimum}} - {{donatorItems.viewingMaximum}} of
+                            {{donatorItems.amount}}
+                        </div>
+
+                        <div id="donatorItemPagination" class="pagination pull-right"></div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div ng-class="{show : activeTab === TAB_NAVIGATION_TYPES.categories}"
+                     class="tab tab-content widget">
+
+                    <input type="text" class="form-control" placeholder="Name..."
+                           ng-model="donatorCategories.searchText"
+                           ng-change="searchCategories()"/>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="category in donatorCategories.categories">
+                            <td>{{category.Name}}</td>
+                            <td>
+                                <button class="btn btn-default btn-xs"
+                                        ng-click="openEditCategoryModal(category)">Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs"
+                                        ng-click="showConfirmDeleteCategory(category)">Delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <div class="viewing pull-left">
+                            Viewing {{donatorCategories.viewingMinimum}} - {{donatorCategories.viewingMaximum}}
+                            of
+                            {{donatorCategories.amount}}
+                        </div>
+
+                        <div id="donatorCategoryPagination" class="pagination pull-right"></div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+
+                <!-- Sets -->
+                <div ng-class="{show : activeTab === TAB_NAVIGATION_TYPES.sets}"
+                     class="tab tab-content widget">
+                    <input type="text" class="form-control" placeholder="Name..." ng-model="donatorSets.searchText"
+                           ng-change="searchSets()"/>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Set</th>
+                            <th>Items</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="set in donatorSets.sets">
+                            <td>{{set.Name}}</td>
+                            <td><div ng-repeat="setItem in set.DonatorShopSet.DonatorShopSetItems">{{setItem.DonatorShopItem.Name}}</div>
+                            </td>
+                            <td>
+                                <button class="btn btn-default btn-xs"
+                                        ng-click="openEditSetModal(set)">Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs"
+                                        ng-click="openDeleteSetModal(set)">Delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <div class="viewing pull-left">
+                            Viewing {{donatorSets.viewingMinimum}} - {{donatorSets.viewingMaximum}} of
+                            {{donatorSets.amount}}
+                        </div>
+
+                        <div id="donatorSetPagination" class="pagination pull-right"></div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<modal id="deleteCategoryModal" title="Confirm delete">
+    <p>Are you sure you want to delete the following category: {{donatorCategories.deleteModel.Name}}.</p>
+    <p>All items that belong to this category will also be removed.</p>
+
+    <button ng-disabled="donatorCategories.isLoading" ng-click="deleteCategory(donatorCategories.deleteModel.Id)"
+            class="btn btn-default">Delete
+    </button>
+</modal>
+
+<modal id="deleteSetModal" title="Confirm delete">
+    <p>Are you sure you want to delete the following set: {{donatorItems.deleteSetModel.Name}}.</p>
+    <p>This will <u>not</u> remove any associated items.</p>
+
+    <button ng-disabled="donatorItems.isLoading" ng-click="deleteSetRecord()"
+            class="btn btn-default">Delete
+    </button>
+</modal>
+
+<modal id="deleteItemModal" title="Confirm delete">
+    <p>Are you sure you want to delete the following item: {{donatorItems.deleteModel.Name}}</p>
+
+    <button ng-disabled="donatorItems.isLoading" ng-click="deleteItem(donatorItems.deleteModel.Id)"
+            class="btn btn-default">Delete
+    </button>
+</modal>
+
+<modal id="addCategoryModal" title="Add category">
+    <form ng-submit="addCategoryRecord()">
+        <div class="control-group">
+            <label>Name</label>
+            <input type="text" ng-model="donatorCategories.addModel.name" placeholder="Name..." required
+                   ng-maxlength="50"/>
+        </div>
+        <input type="submit" ng-disabled="donatorCategories.isLoading" class="btn btn-default"
+               value="Add category"/>
+    </form>
+</modal>
+
+<modal id="editCategoryModal" title="Edit category">
+    <form ng-submit="editCategoryRecord()">
+        <input type="hidden" ng-model="donatorCategories.editModel.id"/>
+        <div class="control-group">
+            <label>Name</label>
+            <input type="text" ng-model="donatorCategories.editModel.name" placeholder="Name..." required
+                   ng-maxlength="50"/>
+        </div>
+        <input type="submit" ng-disabled="donatorCategories.isLoading" class="btn btn-default"
+               value="Update category"/>
+    </form>
+</modal>
+
+<modal id="addItemModal" title="Add item">
+    <form ng-submit="addItemRecord()">
+
+        <div class="control-group">
+            <label>Name</label>
+            <input type="text" ng-model="donatorItems.addModel.name" placeholder="Name..." required
+                   ng-maxlength="50"/>
+        </div>
+
+        <div class="control-group">
+            <label>Description</label>
+            <input type="text" ng-model="donatorItems.addModel.description" placeholder="Description..." required
+                   ng-maxlength="500"/>
+        </div>
+
+        <div class="control-group">
+            <label>Category</label>
+            <select ng-model="donatorItems.addModel.category" ng-options="category.Id as category.Name for category in donatorItems.modalCategories" required></select>
+        </div>
+
+        <div class="control-group">
+            <label>Item ID</label>
+            <input type="number" ng-model="donatorItems.addModel.itemId" placeholder="Item id..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Quantity</label>
+            <input type="number" ng-model="donatorItems.addModel.quantity" placeholder="Quantity..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Damage</label>
+            <input type="number" ng-model="donatorItems.addModel.damage" placeholder="Damage..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Delay</label>
+            <input type="number" ng-model="donatorItems.addModel.delay" placeholder="Delay..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Magazine</label>
+            <input type="number" ng-model="donatorItems.addModel.magazine" placeholder="Magazine..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Max bullet</label>
+            <input type="number" ng-model="donatorItems.addModel.maxBullet" placeholder="Max bullet..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Max weight</label>
+            <input type="number" ng-model="donatorItems.addModel.maxWeight" placeholder="Max weight..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Weight</label>
+            <input type="number" ng-model="donatorItems.addModel.weight" placeholder="Weight..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Reload time (ms)</label>
+            <input type="number" ng-model="donatorItems.addModel.reloadTime" placeholder="Reload time..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Hp</label>
+            <input type="number" ng-model="donatorItems.addModel.hp" placeholder="Hp..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Sex</label>
+            <select ng-model="donatorItems.addModel.sex">
+                <option value="">Unisex</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Thirty day price</label>
+            <input type="number" ng-model="donatorItems.addModel.thirtyDayPrice" placeholder="Thirty day price..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Sixty day price</label>
+            <input type="number" ng-model="donatorItems.addModel.sixtyDayPrice" placeholder="Sixty day price..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Unlimited price (optional)</label>
+            <input type="number" ng-model="donatorItems.addModel.unlimitedPrice" placeholder="Unlimited price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Sale thirty day price (optional)</label>
+            <input type="number" ng-model="donatorItems.addModel.newThirtyDayPrice" placeholder="Thirty day price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Sale sixty day price (optional)</label>
+            <input type="number" ng-model="donatorItems.addModel.newSixtyDayPrice" placeholder="Sixty day price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Sale unlimited price (optional)</label>
+            <input type="number" ng-model="donatorItems.addModel.newUnlimitedPrice" placeholder="Unlimited day price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Image</label>
+            <input id="fileImage" type="file" ng-model="donatorItems.addModel.image" on-file-upload-change="onAddImageChange"
+                   required/>
+        </div>
+
+        <input type="submit" ng-disabled="donatorItems.isLoading" class="btn btn-default" value="Add item"/>
+    </form>
+</modal>
+
+<modal id="editItemModal" title="Edit item">
+    <form ng-submit="editItemRecord()">
+
+        <input type="hidden" ng-model="donatorItems.editModel.id"/>
+
+        <div class="control-group">
+            <label>Name</label>
+            <input type="text" ng-model="donatorItems.editModel.name" placeholder="Name..." required
+                   ng-maxlength="50"/>
+        </div>
+
+        <div class="control-group">
+            <label>Description</label>
+            <input type="text" ng-model="donatorItems.editModel.description" placeholder="Description..." required
+                   ng-maxlength="500"/>
+        </div>
+
+        <div class="control-group">
+            <label>Category</label>
+            <select ng-model="donatorItems.editModel.category" ng-options="category.Id as category.Name for category in donatorItems.modalCategories" required></select>
+        </div>
+
+        <div class="control-group">
+            <label>Item ID</label>
+            <input type="number" ng-model="donatorItems.editModel.itemId" placeholder="Item id..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Quantity</label>
+            <input type="number" ng-model="donatorItems.editModel.quantity" placeholder="Quantity..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Damage</label>
+            <input type="number" ng-model="donatorItems.editModel.damage" placeholder="Damage..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Delay</label>
+            <input type="number" ng-model="donatorItems.editModel.delay" placeholder="Delay..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Magazine</label>
+            <input type="number" ng-model="donatorItems.editModel.magazine" placeholder="Magazine..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Max bullet</label>
+            <input type="number" ng-model="donatorItems.editModel.maxBullet" placeholder="Max bullet..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Max weight</label>
+            <input type="number" ng-model="donatorItems.editModel.maxWeight" placeholder="Max weight..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Weight</label>
+            <input type="number" ng-model="donatorItems.editModel.weight" placeholder="Weight..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Reload time (ms)</label>
+            <input type="number" ng-model="donatorItems.editModel.reloadTime" placeholder="Reload time..."
+                   required/>
+        </div>
+
+        <div class="control-group">
+            <label>Hp</label>
+            <input type="number" ng-model="donatorItems.editModel.hp" placeholder="Hp..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Sex</label>
+            <select ng-model="donatorItems.editModel.sex">
+                <option value="" ng-selected="donatorItems.editModel.sex === null">Unisex</option>
+                <option value="0" ng-selected="donatorItems.editModel.sex === 0">Male</option>
+                <option value="1" ng-selected="donatorItems.editModel.sex === 1">Female</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Thirty day price</label>
+            <input type="number" ng-model="donatorItems.editModel.thirtyDayPrice" placeholder="Thirty day price..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Sixty day price</label>
+            <input type="number" ng-model="donatorItems.editModel.sixtyDayPrice" placeholder="Sixty day price..." required/>
+        </div>
+
+        <div class="control-group">
+            <label>Unlimited price (optional)</label>
+            <input type="number" ng-model="donatorItems.editModel.unlimitedPrice" placeholder="Unlimited price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Sale thirty day price (optional)</label>
+            <input type="number" ng-model="donatorItems.editModel.newThirtyDayPrice" placeholder="Thirty day price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Sale sixty day price (optional)</label>
+            <input type="number" ng-model="donatorItems.editModel.newSixtyDayPrice" placeholder="Sixty day price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Sale unlimited price (optional)</label>
+            <input type="number" ng-model="donatorItems.editModel.newUnlimitedPrice" placeholder="Unlimited day price..."/>
+        </div>
+
+        <div class="control-group">
+            <label>Image (leave empty if you wish to keep the old image)</label>
+            <input type="file" ng-model="donatorItems.editModel.image" on-file-upload-change="onEditImageChange"/>
+        </div>
+
+        <input type="submit" ng-disabled="donatorItems.isLoading" class="btn btn-default" value="Edit item"/>
+    </form>
+</modal>
+
+<modal id="addSetModal" title="Add set">
+    <form ng-submit="addSetRecord()">
+
+        <div class="control-group">
+            <label>Set</label>
+            <select ng-model="donatorItems.addSetModel.setId" required>
+                <option hidden selected value="">Select set item...</option>
+                <option ng-repeat="item in donatorSets.items" ng-value="item.Id">{{item.Name}}</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Items</label>
+            <select ng-model="donatorItems.addSetModel.itemIds" class="select-items" required multiple="true">
+                <option hidden selected value="">Select items...</option>
+                <option ng-repeat="item in donatorSets.items" ng-value="item.Id">{{item.Name}}</option>
+            </select>
+        </div>
+
+        <input type="submit" ng-disabled="donatorItems.isLoading" class="btn btn-default" value="Add set"/>
+    </form>
+</modal>
+
+<modal id="editSetModal" title="Edit set">
+    <form ng-submit="editSetRecord()">
+        <div class="control-group">You are editing the following set: {{donatorItems.editSetModel.name}}.</div>
+        <div class="control-group">
+            <label>Items</label>
+            <select ng-model="donatorItems.editSetModel.itemIds" class="select-items" required multiple="true">
+                <option ng-repeat="item in donatorItems.editSetModel.items" ng-value="item.id" ng-selected="item.isSelected">{{item.name}}</option>
+            </select>
+        </div>
+
+        <input type="submit" ng-disabled="donatorItems.isLoading" class="btn btn-default" value="Add set"/>
+    </form>
+</modal>
+
+<link href="/css/adminShop.css" rel="stylesheet"/>

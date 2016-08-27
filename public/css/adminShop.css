@@ -1,0 +1,30 @@
+#adminShop #items{
+    margin-top: 20px;
+}
+
+#adminShop hr{
+    margin: 0 0 25px 0;
+    border: 1px dashed #444444;
+}
+
+#adminShop #actions{
+    margin-bottom: 20px;
+}
+
+#adminShop #actions .button-extrasmall{
+    margin-right: 10px;
+}
+
+#adminShop #actions .button-extrasmall:first-of-type{
+    margin-left: 0;
+}
+
+#addItemModal form, #editItemModal form, #addCategoryModal form{
+    max-height: 360px;
+    overflow: auto;
+    padding-right: 20px;
+}
+
+#addSetModal .select-items, #editSetModal .select-items{
+    height: 200px;
+}

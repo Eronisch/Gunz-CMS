@@ -1,0 +1,55 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+    <div id="accountClans">
+
+        <div id="main" class="row">
+
+            <div class="span8">
+                <div id="download" class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">My clans</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <table id="clanResults" class="table responsive table-striped">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Wins</th>
+                                <th>Draws</th>
+                                <th>Lose</th>
+                                <th>Points</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-if="clans.length === 0">
+                                <td colspan="7">You haven't joined any clans yet.</td>
+                            </tr>
+                            <tr ng-repeat="clan in clans">
+                                <td>
+                                    <img ng-src="{{clan.EmblemUrl}}"/>
+                                </td>
+                                <td>{{clan.Name}}</td>
+                                <td>{{clan.Wins}}</td>
+                                <td>{{clan.Draws}}</td>
+                                <td>{{clan.Losses}}</td>
+                                <td>{{clan.TotalPoints}}</td>
+                                <td><a class="btn btn-warning btn-xs" ng-href="/clan/view/{{clan.ClanId}}"><i class="fa fa-eye"></i> View</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <account></account>
+            </div>
+        </div>
+    </div>
+
+    <link href="/css/myClans.css" rel="stylesheet" type="text/css" />
+</div>

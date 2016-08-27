@@ -1,0 +1,40 @@
+﻿<div id="members">
+    <div id="membersHeader" class="bar">
+        <i class="fa fa-group"></i> {{amountMembers}} <span ng-if="amountMembers === 1">Member</span> <span ng-if="amountMembers !== 1">Members</span>
+    </div>
+    <div id="info" class="barContent">
+        <div class="row-fluid">
+
+            <div class="span12">
+                <p class="span3">Created</p>
+
+                <p class="span9">{{clan.RegDate}}</p>
+            </div>
+
+            <div class="span12">
+                <p class="span3">Wins</p>
+
+                <p class="span9">{{clan.Wins}}</p>
+            </div>
+
+            <div class="span12">
+                <p class="span3">Draws</p>
+
+                <p class="span9">{{clan.Draws}}</p>
+            </div>
+
+            <div class="span12">
+                <p class="span3">Loses</p>
+
+                <p class="span9">{{clan.Losses}}</p>
+            </div>
+        </div>
+    </div>
+    <div id="social" class="bar">
+        <a ng-href="{{clan.FacebookUrl}}" ng-show="clan.FacebookUrl"><img src="/img/facebook.png" /></a>
+        <a ng-href="{{clan.GooglePlusUrl}}" ng-show="clan.GooglePlusUrl"><img src="/img/googleplus.png" /></a>
+        <a ng-href="{{clan.TwitterUrl}}" ng-show="clan.TwitterUrl"><img src="/img/twitter.png" /></a>
+
+        <div class="clear"></div>
+    </div>
+</div>

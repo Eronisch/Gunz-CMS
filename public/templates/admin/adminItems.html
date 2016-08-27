@@ -1,0 +1,42 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Send item</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+
+            <div ng-show="hasSend && !isSuccess" class="alert alert-danger">
+                This user does not exist.
+            </div>
+
+            <div ng-show="hasSend && isSuccess" class="alert alert-success">
+                The item has been send.
+            </div>
+
+            <form ng-submit="sendItem()">
+                <div class="control-group">
+                    <label>Username</label>
+                    <input type="text" ng-model="item.username" required/>
+                </div>
+                <div class="control-group">
+                    <label>Item id</label>
+                    <input type="number" ng-model="item.itemId" required/>
+                </div>
+                <div class="control-group">
+                    <label>Quantity</label>
+                    <input type="number" ng-model="item.quantity" required/>
+                </div>
+                <div class="control-group">
+                    <label>Days (Leave empty for unlimited)</label>
+                    <input type="number" ng-model="item.days"/>
+                </div>
+
+                <input type="submit" ng-disabled="isSending" class="button button-extrasmall" value="Send item"/>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+﻿#character #header #background {
+    min-height: 350px;
+    overflow: hidden;
+}
+
+#character #header {
+    overflow: hidden;
+    height: 350px;
+    margin-left: -32px;
+    margin-right: -32px;
+    margin-top: -32px;
+    position: relative;
+    text-shadow: 1px 2px #000;
+}
+
+    #character #header #avatar {
+        position: absolute;
+        padding: 5px 0px 5px 0px;
+        top: 55px;
+        left: 25px;
+        border: 1px solid #000;
+        -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+        -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+        box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+        background: #1a1b1f;
+    }
+
+        #character #header #avatar #innerAvatar img {
+            width: 180px;
+            height: auto;
+        }
+
+        #character #header #avatar #innerAvatar {
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+            #character #header #avatar #innerAvatar #name {
+                font-size: 17px;
+                color: #fff;
+                text-shadow: 0 2px 3px #000;
+                text-align: center;
+                margin: 21px 0 0 0;
+                text-transform: uppercase;
+            }
+
+    #character #header #friends {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+    }
+
+#character #main {
+    margin-top: 20px;
+}
+
+#character #matches img {
+    float: left;
+    margin-right: 15px;
+    width: 36.95%;
+    height: auto;
+    background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: linear-gradient(to top, #1a1b1f, #212528);
+    -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    padding: 5px;
+    border: 1px solid #000;
+}
+
+#character #matches .mapName {
+    color: #1E8A22;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#character #matches ul {
+    margin: 0;
+}
+
+#character #matches .scores {
+    position: absolute;
+    float: right;
+    margin: 0;
+    top: 3px;
+}
+
+#character #matches .info {
+    float: left;
+    position: relative;
+    margin-top: 10px;
+}
+
+#character #matches .details {
+    margin-left: 14px;
+}
+
+    #character #matches .details li {
+        border: 0;
+        padding: 0;
+        color: #929292;
+        font-size: 11px;
+        list-style-type: circle;
+        padding-left: 5px;
+        line-height: initial;
+        margin-top: 6px;
+    }
+
+#character #matches .scoreBoard {
+    margin-top: 4px;
+}
+
+#character #matches .clanwar-list {
+    margin-top: 10px;
+}
+
+#character #matches .clanwar-list > li {
+    display: inline-block;
+    margin-right: 15px;
+    background-color: #F3F3F3;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 32.25%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+    #character #matches .clanwar-list > li:nth-child(3n+3) {
+        margin-right: 0;
+    }
+
+#character #matches .tab {
+    padding: 0;
+    background-color: initial;
+}
+
+#character #matches .pagination {
+    margin-bottom: 0;
+}
+
+#character #matches .widget {
+    margin-bottom: 20px;
+}

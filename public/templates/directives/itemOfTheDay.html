@@ -1,0 +1,151 @@
+﻿<div id="itemOfTheDay" class="widget">
+    <div class="title-wrapper">
+        <h3 class="widget-title">Item of the day</h3>
+
+        <div class="clear"></div>
+    </div>
+    <div class="wcontainer" cg-busy="promiseItemOfTheDay">
+        <div id="item">
+
+            <div ng-show="!isLoaded" class="loadingWrapper">
+                <div class="loadingGear"></div>
+            </div>
+
+            <div ng-show="isLoaded">
+
+                <div ng-if="!item">
+                    There is no item of the day.
+                </div>
+
+                <div ng-if="item">
+                    <div ng-if="purchaseItemModal.statusCode != null"
+                         ng-class="{'alert alert-danger' : purchaseItemModal.statusCode !== PURCHASE_STATUS.success, 'alert alert-success' : purchaseItemModal.statusCode ===  PURCHASE_STATUS.success}">
+                        <div ng-if="purchaseItemModal.statusCode === PURCHASE_STATUS.noItem">There is no item of the day.</div>
+                        <div ng-if="purchaseItemModal.statusCode === PURCHASE_STATUS.invalidBalance">You don't have enough GZF gold  to purchase this
+                            item.
+                        </div>
+                        <div ng-if="purchaseItemModal.statusCode === PURCHASE_STATUS.limitReached">We have reached the limit of the amount of
+                            purchases, better luck next time!
+                        </div>
+                        <div ng-if="purchaseItemModal.statusCode === PURCHASE_STATUS.unlimitedNotAvailable">This item can't be purchased for unlimited days.
+                        </div>
+                        <div ng-if="purchaseItemModal.statusCode === PURCHASE_STATUS.success">You've successfully purchased the item of the
+                            day.
+                        </div>
+                    </div>
+
+                    <div id="frontItem" class="imageContainer">
+                        <div class="ribbon-wrapper-orange">
+                            <div class="ribbon-orange">SALE</div>
+                        </div>
+                        <img ng-src="/img/itemOfTheDay/{{purchaseItemModal.item.Id}}/{{purchaseItemModal.item.Image}}"
+                             alt="Item of the day"/>
+                    </div>
+
+                    <div class="itemDescription">
+                        <div class="form-group">
+                            <div class="name">{{purchaseItemModal.item.Name}}</div>
+                            <div class="description">{{purchaseItemModal.item.Description}}</div>
+                            <div class="price"><span class="cash"><i class="fa fa-money"></i> GZF gold :</span>
+                                {{purchaseItemModal.item.ThirtyDayPrice}}
+                            </div>
+                            <div class="stock"><span class="amountStock"><i class="fa fa-exclamation-triangle"></i> Stock:</span>
+                                {{purchaseItemModal.stock != null ? purchaseItemModal.stock : "∞"}}
+                            </div>
+                            <div class="time">
+                                <span class="timeLeft"><i class="fa fa-calendar"></i> Time left:</span>
+                                <timer ng-class="countdown" end-time="purchaseItemModal.item.TimeStamp"
+                                       finish-callback="onCountDownFinished()">{{hours}} hours, {{minutes}} min,
+                                    {{seconds}} sec.
+                                </timer>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <button ng-disabled="!account || purchaseItemModal.stock === 0 || purchaseItemModal.hasEnded"
+                            ng-click="openModal()" id="buyItemOfTheDay" class="button-extrasmall btn-block nonLoading">
+                        <i class="fa fa-shopping-cart"></i> Buy
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <modal id="itemOfTheDayModal" title="Purchase item of the day">
+            <div id="purchaseItemOfTheDay">
+                <div id="leftShopItemContent">
+                    <div class="imageContainer">
+                        <div class="ribbon-wrapper-orange">
+                            <div class="ribbon-orange">SALE</div>
+                        </div>
+                        <img ng-src="/img/itemOfTheDay/{{purchaseItemModal.item.Id}}/{{purchaseItemModal.item.Image}}"
+                             alt="Item of the day"/>
+                    </div>
+                    <button id="purchaseBtn" ng-class="{loading : purchaseItemModal.isBuying}"
+                            ng-disabled="purchaseItemModal.getHasInvalidBalance() || purchaseItemModal.isBuying"
+                            ng-click="purchase()"
+                            class="btn btn-default btn-small nonLoading">Purchase
+                    </button>
+                </div>
+
+                <div id="rightShopItemContent">
+                    <h4>{{purchaseItemModal.item.Name}}</h4>
+
+                    <div id="description">{{purchaseItemModal.item.Description}}</div>
+
+                    <div id="price"><i class="fa fa-money"></i> <span id="coins">{{purchaseItemModal.item.ThirtyDayPrice}} GZF gold  <span
+                            id="thirtyDays">(30 Days)</span></span></div>
+                </div>
+
+
+                <div class="clear"></div>
+
+                <hr/>
+
+                <div class="form-group">
+                    Select the amount of days you want to purchase the item:
+
+                    <select ng-model="purchaseItemModal.purchaseType">
+                        <option ng-repeat="type in ITEM_PURCHASE_TYPES" value="{{type.id}}" ng-disabled="purchaseItemModal.isPurchaseTypeDisabled(type.id)">{{type.name}}</option>
+                    </select>
+                </div>
+
+                <hr/>
+
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Damage</th>
+                        <th>Delay</th>
+                        <th>Magazine</th>
+                        <th>Max Bullet</th>
+                        <th>Max Weight</th>
+                        <th>Reload Time</th>
+                        <th>HP</th>
+                        <th>AP</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{purchaseItemModal.item.Damage}}</td>
+                        <td>{{purchaseItemModal.item.Delay}} ms</td>
+                        <td>{{purchaseItemModal.item.Magazine}}</td>
+                        <td>{{purchaseItemModal.item.MaxBullet}}</td>
+                        <td>{{purchaseItemModal.item.MaxWeight}}</td>
+                        <td>{{purchaseItemModal.item.ReloadTime}} sec</td>
+                        <td>{{purchaseItemModal.item.Hp}}</td>
+                        <td>{{purchaseItemModal.item.Ap}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div id="accountBalance">
+                    Account balance after purchase: <i class="fa fa-money"></i>
+                    {{purchaseItemModal.getAccountBalanceAfter()}}
+                </div>
+            </div>
+        </modal>
+
+    </div>
+</div>

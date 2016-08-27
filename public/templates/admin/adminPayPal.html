@@ -1,0 +1,71 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminAccount" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Admin administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+            <input type="text" class="form-control" placeholder="Account name..." ng-model="searchText"
+                   ng-change="search()"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>AccountId</th>
+                    <th>Name</th>
+                    <th>Invoice ID</th>
+                    <th>Payer ID</th>
+                    <th>Payment ID</th>
+                    <th>Create date</th>
+                    <th>Paid date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="payment in payments">
+                    <td>{{payment.AccountId}}</td>
+                    <td>{{payment.Account.Name}}</td>
+                    <td>{{payment.InvoiceId}}</td>
+                    <td>{{payment.PayerId}}</td>
+                    <td>{{payment.PaymentId}}</td>
+                    <td>{{payment.Date}}</td>
+                    <td>{{payment.DateCompleted ? payment.DateCompleted : 'None'}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div class="viewing pull-left">
+                    Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amount}}
+                </div>
+
+                <div class="pagination pull-right"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <modal id="cashModal" title="Add GZF gold ">
+
+        <div class="control-group">
+            <label>Username</label>
+            <input type="text" ng-model="cash.userId" placeholder="UserId" required/>
+        </div>
+
+        <div class="control-group">
+            <label>GZF gold </label>
+            <input type="number" ng-model="cash.cash" placeholder="Amount" min="1" required/>
+        </div>
+
+        <div ng-if="cash.hasError" class="alert alert-danger">
+            The user doesn't exist.
+        </div>
+
+        <button ng-disabled="cash.isLoading" ng-click="addCash()" class="btn btn-default btn-small">Add Gold</button>
+    </modal>
+
+
+</div>
+
+<link href="/css/adminAccount.css" rel="stylesheet"/>

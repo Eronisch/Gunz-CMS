@@ -1,0 +1,100 @@
+<div class="page normal-page container">
+
+    <div id="clanMatches">
+
+        <clanheader ng-attr-tab="matches"></clanheader>
+
+        <div id="main" class="row-fluid">
+
+            <div class="span8">
+                <div id="download" class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">Matches</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <table class="table table-response table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Opponent</th>
+                                    <th>Map</th>
+                                    <th>Wins</th>
+                                    <th>Losses</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="matches.length === 0">
+                                    <td colspan="7">There haven't been any clan wars yet.</td>
+                                </tr>
+                                <tr ng-repeat="match in matches">
+                                    <td>
+                                        <a ng-href="/clan/view/{{match.LoserClanId}}"><img ng-if="match.IsWinner" title="{{match.LoserClanName}}" ng-src="{{match.LoserClan.EmblemUrl}}" class="emblem" alt="Emblem" /></a>
+                                        <a ng-href="/clan/view/{{match.WinnerClanId}}"><img ng-if="!match.IsWinner" title="{{match.WinnerClanName}}" ng-src="{{match.WinnerClan.EmblemUrl}}" class="emblem" alt="Emblem" /></a>
+                                    </td>
+                                    <td>{{match.Map}}</td>
+                                    <td>
+                                        <span ng-if="match.IsWinner">{{match.RoundWins}}</span>
+                                        <span ng-if="!match.IsWinner">{{match.RoundLosses}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="match.IsWinner">{{match.RoundLosses}}</span>
+                                        <span ng-if="!match.IsWinner">{{match.RoundWins}}</span>
+                                    </td>
+                                    <td>{{match.RegDate}}</td>
+                                    <td><button ng-click="openInfoModal(match.IsWinner, match.WinnerMembers, match.LoserMembers)" class="btn btn-default btn-xs">Info</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="pagination"></div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4">
+                <clan></clan>
+            </div>
+        </div>
+
+        <modal id="matchCharactersModal" title="Match characters">
+
+            <h4>Winning team members</h4>
+            <table class="table table-response">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in clanInfo.winMembers">
+                        <td><a ng-click="hideMatchCharacters()" href="/character/view/{{user.Cid}}">{{user.Name}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Losing team members</h4>
+            <table class="table table-response">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in clanInfo.loseMembers">
+                        <td><a ng-click="hideMatchCharacters()" href="/character/view/{{user.Cid}}">{{user.Name}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </modal>
+
+        <link rel="stylesheet" type="text/css" href="/css/clanMatches.css" />
+
+        <script src="/js/pagination.js"></script>
+    </div>
+</div>

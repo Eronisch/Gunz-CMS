@@ -1,0 +1,43 @@
+﻿<div id="individualRanking" class="widget">
+    <div class="title-wrapper">
+        <h3 class="widget-title">Individual ranking</h3>
+
+        <div class="clear"></div>
+    </div>
+    <div class="wcontainer">
+
+        <div ng-show="!isLoaded" class="loadingWrapper">
+            <div class="loadingGear"></div>
+        </div>
+
+        <div ng-show="isLoaded">
+        <span ng-if="playerRanking.length === 0">
+            There are no players yet.
+        </span>
+            <table ng-if="playerRanking.length > 0" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Player</th>
+                    <th>Level</th>
+                    <th>K/d</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="player in playerRanking">
+                    <td>
+                        <span ng-if="5 > $index"><img ng-src="/img/ranks/{{$index + 1}}.png"/></span>
+                        <span ng-if="$index > 4">{{$index + 1}}</span>
+                    </td>
+                    <td><a ng-href="/character/view/{{player.Cid}}">{{player.Name}}</a></td>
+                    <td>{{player.Level}}</td>
+                    <td>{{player.Kd}}%</td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <a href="/individualranking" class="button-extrasmall">View more</a>
+            </div>
+        </div>
+    </div>
+</div>

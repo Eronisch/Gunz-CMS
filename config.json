@@ -1,0 +1,10 @@
+﻿{
+    "port": 5000,
+    "api": {
+        "mode": "live",
+        "host": "api.paypal.com",
+        "port": "",
+        "client_id": "YOUR_CLIENT_ID",
+        "client_secret": "YOUR_SECRET"
+    }
+}

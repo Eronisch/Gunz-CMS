@@ -1,0 +1,190 @@
+.column-tickets {
+	width: 70px;
+}
+
+.column-match_status {
+	width: 100px;
+}
+
+.column-team1, .column-team2 {
+	width: 140px;
+}
+
+.column-game_title {
+	width: 140px;
+}
+
+.column-game_title .icon {
+	float: left;
+	margin: 2px;
+}
+
+.wp-cw-matcheditor h2 {
+	position: relative;
+	margin-right: 90px;
+}
+
+.wp-cw-mapeditor .screenshot img,
+.wp-cw-gameeditor .screenshot img {
+    margin: 20px 0;
+    border: 1px solid #dfdfdf;
+	padding: 2px;
+	background-color: #fff;
+}
+
+.wp-cw-matcheditor label input[type=radio] {
+	vertical-align: baseline;
+}
+
+.wp-cw-matcheditor textarea#description {
+
+    resize: vertical;
+	border:0px;
+}
+
+.wp-cw-matcheditor .match-results {
+    margin: 20px 0;
+    width: 400px;
+}
+
+.wp-cw-matcheditor .match-results .map {
+    margin: 10px 0;
+    padding: 5px;
+    position: relative;
+}
+
+.wp-cw-matcheditor .match-results .teams {
+
+}
+
+.wp-cw-matcheditor .match-results .team2-inline {
+	margin: 10px 0;
+}
+
+.wp-cw-matcheditor .match-results .team2-inline input {
+	width: 170px;
+	float: left;
+}
+
+.wp-cw-matcheditor .match-results .team2-inline select {
+	margin-left: 5px;
+	width: 150px;
+	float: left;
+}
+
+.wp-cw-matcheditor .match-results select.team-select {
+    width: 150px;
+}
+
+.wp-cw-matcheditor .match-results .leftcol {
+    float: left;
+    width: 150px;
+}
+
+.wp-cw-matcheditor .match-results .map img.screenshot {
+    border: 1px solid #222;
+    display: block;
+}
+
+.wp-cw-matcheditor .match-results .map .title {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.wp-cw-matcheditor .match-results .map .title span {
+    float: left;
+}
+
+.wp-cw-matcheditor .match-results .map select {
+    margin-top: 5px;
+    width: 150px;
+}
+
+.wp-cw-matcheditor .match-results .round {
+    width: 130px;
+}
+
+.wp-cw-matcheditor .match-results .round,
+.wp-cw-matcheditor .match-results .add-round
+{
+    margin-left: 160px;
+}
+
+.wp-cw-matcheditor .match-results .add-round {
+    margin-top: 10px;
+}
+
+.wp-cw-matcheditor .match-results .add-map {
+    margin: 20px 0;
+}
+
+.wp-cw-matcheditor .match-results .remove
+{
+    background-color: transparent;
+    background-image: url("../../../wp-admin/images/xit.gif");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: 0% 50%;
+    width: 10px;
+    height: 22px;
+    overflow: hidden;
+    float: right;
+    display: block;
+}
+
+.wp-cw-matcheditor .match-results .remove:hover
+{
+    background-color: transparent;
+    background-image: url("../../../wp-admin/images/xit.gif");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: -10px 50%;
+}
+
+.wp-cw-matcheditor .match-results  .remove-matchmap {
+    float: left;
+    margin-left: 10px;
+}
+
+.wp-cw-settings .listbox label input {
+	display: inline;
+	width: auto;
+}
+
+.available-games img {
+	vertical-align: middle;
+}
+
+.linkbar {
+    display: block;
+    font-family: Helvetica, Arial;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.linkbar li {
+    list-style: none;
+    float: left;
+    margin-left: 10px;
+    line-height: 35px;
+    padding-left: 20px;
+}
+
+.linkbar li.post-link {
+    background: transparent url(../img/icon-link16.png) 0% 50% no-repeat;
+}
+
+.linkbar li.post-comments {
+    background: transparent url(../img/icon-comments16.png) 0% 50% no-repeat;
+}
+#qt_description_toolbar input{
+	float:left;
+	width: auto !important;
+}

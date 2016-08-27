@@ -1,0 +1,52 @@
+﻿#donate hr {
+    padding: 0;
+    margin: 20px 0;
+    border: 1px dashed#CACACA;
+}
+
+#donate .paymentDescription {
+    font-size: 11px;
+    margin: 15px 0 10px 0;
+}
+
+#donate form {
+    margin-right: 10px;
+}
+
+#donate .form {
+    margin-right: 0;
+}
+
+#donate form {
+    display: inline;
+}
+
+#donate #paySafeCardImg {
+    margin-left: 50px;
+}
+
+#donate img{
+    height: 40px;
+    width: auto;
+    margin-top: 10px;
+}
+
+#donate .inactive{
+    opacity: .4;
+}
+
+#donate #paySafeCard button{
+    margin-right: 10px;
+}
+
+#paySafeCardModal #paySafeCardWarning{
+    margin-bottom: 10px;
+}
+
+#paySafeCardModal #cashSelect{
+    width: 100%;
+}
+
+#paySafeCardModal form{
+    margin-bottom: 0;
+}

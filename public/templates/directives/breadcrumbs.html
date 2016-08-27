@@ -1,0 +1,23 @@
+﻿<div id="breadcrumbs" class="container">
+    <div class="title_wrapper">
+        <div class="row-fluid">
+            <div class="span6">
+                <h1>
+                    <i class="fa fa-globe"></i> {{title}}
+                </h1>
+            </div>
+            <div class="span6">
+                <div class="breadcrumbs">
+                    <strong>
+                        <span ng-repeat="link in links">
+                            <span ng-if="$index > 0">/</span>
+                            <a ng-if="link.link" ng-href="{{link.link}}">{{link.title}}</a>
+                            <span ng-if="!link.link">{{link.title}}</span>
+                        </span>
+                    </strong>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

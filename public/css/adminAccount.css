@@ -1,0 +1,20 @@
+#adminAccount tr{
+    cursor: pointer;
+}
+
+#adminAccount tr:hover td{
+    background-color: #ebebeb;
+}
+
+#adminAccount .actions input[type=button]{
+    margin-bottom: 0;
+}
+
+#adminAccount .actions{
+    margin-bottom: 15px;
+}
+
+#adminAccount table img{
+    height: 25px;
+    width: auto;
+}

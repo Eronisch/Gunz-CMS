@@ -1,0 +1,73 @@
+<div class="page normal-page container">
+    <div id="character">
+        
+        <characterHeader ng-attr-tab="friends"></characterHeader>
+
+        <div id="main" class="row-fluid">
+            <div id="friends" class="span12">
+                <div class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">My friends</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <input type="text" ng-model="searchUsername" ng-change="search()" placeholder="Username..." class="form-control"/>
+                        <button class="button-small" ng-click="search()">Search</button>
+
+                        <div class="pull-right">
+                            <span class="orderBy">Order by:</span>
+                            <select ng-model="order" ng-change="changeOrder()">
+                                <option value="alphabetical">Alphabetically</option>
+                                <option value="lastAdded">Newest &#8595;</option>
+                                <option value="lastActive">Last active &#8595;</option>
+                            </select>
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <hr/>
+
+                        <div id="friendsList">
+                            <ul>
+                                <li id="noFriends" ng-if="friends.length === 0">There are no friends yet.</li>
+                                <li ng-repeat="friend in friends">
+                                    <img ng-src="{{friend.AvatarUrl}}" alt="Avatar"/>
+                                    <div class="name">{{friend.Name}}</div>
+                                    <div class="lastActive">
+                                        {{friend.LastTime}}
+                                    </div>
+                                    <i ng-if="isOwner" ng-click="showDeleteModal(friend)" class="fa fa-remove"></i>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+
+                        <hr id="borderSpace"/>
+
+                        <div>
+                            <div class="viewing pull-left">
+                                Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amountFriends}}
+                            </div>
+
+                            <div id="pagination" class="pagination pull-right"></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <modal id="deleteFriendModal" title="Delete friend">
+        <p>Are you sure you want to delete this friend? Maybe you will break his heart!</p>
+
+        <p>If you are really want to break your friends heart then click this thingy below.</p>
+
+        <button ng-click="deleteFriend()" ng-disabled="isDeleting" class="btn btn-default btn-xs">Break my friends heart</button>
+    </modal>
+
+    <link rel="stylesheet" type="text/css" href="/css/characterFriends.css"/>
+    <script src="/js/pagination.js"></script>
+</div>

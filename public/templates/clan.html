@@ -1,0 +1,190 @@
+<div class="page normal-page container">
+    <div id="clanPage">
+
+        <clanheader ng-attr-tab="home"></clanheader>
+
+        <div id="main" class="row-fluid">
+            <div class="span8">
+                <div class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">About us</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <div class="introduction">
+                            <div id="introductionText" class="introductionText" ng-if="introduction.text && !isOwner" ng-bind-html="renderHtml(introduction.text)"></div>
+                            <div ng-show="!clan.Introduction && !isOwner">This clan doesn't have an introduction yet.</div>
+                            <textarea ng-if="isOwner" ui-tinymce="tinymceOptions" ng-model="introduction.text"></textarea>
+                            <div id="introductionAlert" class="alert alert-success introductionAlert">
+                                Introduction has been saved!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block-divider"></div>
+
+                <div id="comments" class="comment-form">
+                    <h2>One Comment</h2>
+                    <ul class="comment-list">
+                        <li class="comment" ng-if="comments.length === 0">
+                            There are no comments yet.
+                        </li>
+                        <li ng-repeat="comment in comments" class="comment">
+                            <div class="wcontainer">
+                                <img alt="Avatar" ng-src="{{comment.Account.AvatarUrl}}">
+
+                                <div class="comment-body">
+                                    <div class="comment-author"><span class="comment-info">{{comment.Account.UserId}}</span></div>
+                                    <i>
+                                        <small>{{comment.Date}}</small>
+                                    </i><br>
+
+                                    <p>
+                                        {{comment.Comment}}
+                                    </p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button id="loadMore" ng-click="loadMoreComments()" ng-class="{loading : isLoading}" ng-disabled="isLoading || !hasCommentsLeft" class="button-small btn-block nonLoading">Load more <i class="fa fa-plus"></i></button>
+
+                    <div ng-if="isLoggedIn" id="respond">
+                        <h2>Leave a comment</h2>
+
+                        <div class="formcontainer">
+                            <form id="commentform" class="contact comment-form" ng-submit="createComment()">
+                                <!-- #form-section-url .form-section -->
+                                <div id="form-section-comment" class="form-section input-prepend">
+                                    <span class="add-on"><i class="icon-comment"></i></span>
+                                    <textarea ng-model="addComment.comment" placeholder="Your message*" id="comment" name="comment" cols="45" rows="8"
+                                              tabindex="6"></textarea>
+                                </div>
+                                <!-- #form-section-comment .form-section -->
+                                <div class="form-submit">
+                                    <button id="submit" ng-disabled="isSending" name="submit" class="button-small button-green"
+                                            tabindex="7">Submit comment</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="span4">
+
+                <clan></clan>
+
+                <div id="actions" class="widget" ng-if="isOwner">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">Actions</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <button id="btnClanReset" ng-click="openClanResetModal()" class="button-extrasmall btn-block">Reset win/lose</button>
+                    </div>
+                </div>
+
+                <div id="admins" class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">Administrators</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <ul>
+                            <li ng-if="administrators.length === 0">
+                                There are no administrators yet.
+                            </li>
+                            <li ng-repeat="admin in administrators">
+                                <a ng-href="/character/view/{{admin.Character.Cid}}">
+                                    <div>
+                                        <img ng-src="{{admin.Character.AvatarUrl}}"/>
+
+                                        <div ng-switch on="admin.Grade">
+                                            <div ng-switch-when="1" class="username leader">{{admin.Character.Name}}</div>
+                                            <div ng-switch-when="2" class="username admin">{{admin.Character.Name}}</div>
+                                            <div ng-switch-when="9" class="username">{{admin.Character.Name}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="matches" class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">Latest matches</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <ul class="clanwar-list">
+                            <li ng-if="matches.length === 0" class="clanwar-item game-2">
+                                There are no matches yet.
+                            </li>
+                            <li ng-repeat="match in matches" class="clanwar-item game-2">
+                                <a ng-href="/clan/{{match.IsWinner ? match.LoserClanId : match.WinnerClanId}}">
+                                    <div class="wrap">
+
+                                        <div ng-if="match.IsWinner" class="scores win">{{match.RoundWins}}:{{match.RoundLosses}}</div>
+                                        <div ng-if="!match.IsWinner" class="scores draw">{{match.RoundLosses}}:{{match.RoundWins}}</div>
+                                        <div class="match-wrap">
+                                            <div ng-if="match.IsWinner">
+                                                <img ng-src="{{match.LoserClan.EmblemUrl}}" class="clan1img">
+                                            </div>
+                                            <div ng-if="!match.IsWinner">
+                                                <img ng-src="{{match.WinnerClan.EmblemUrl}}" class="clan1img">
+                                            </div>
+
+                                            <span class="vs">vs.</span>
+                                            <div class="opponent-team">
+                                                <span ng-if="match.IsWinner">{{match.LoserClanName}}</span>
+                                                <span ng-if="!match.IsWinner">{{match.WinnerClanName}}</span>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="date">{{match.RegDate}}</div>
+                                        <div class="players">
+                                            <ul>
+                                                <li ng-if="match.IsWinner ? match.WinnerMembers.length === 0 : match.LoserMembers.length === 0">
+                                                    No players.
+                                                </li>
+                                                <li ng-repeat="player in match.IsWinner ? match.LoserMembers : match.WinnerMembers">
+                                                    <div class="player"><a ng-href="/character/view/{{player.Cid}}">{{player.Name}}</a></div>
+                                                </li>
+                                            </ul>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <modal id="resetClanModal" title="Reset clan">
+            <p>Are things not working out like you would? Did some players mess up your amazing score?</p>
+
+            <p>Then it's maybe time to reset your clan score. You can easily do this with the button below. Be careful though, once you do this you can't undo it.</p>
+
+            <button ng-disabled="resetScore.isLoading" ng-click="resetScore()" class="btn btn-default btn-small">Reset score</button>
+        </modal>
+
+    </div>
+
+    <link rel="stylesheet" type="text/css" href="/css/clan.css" />
+    <script src="/js/tinymce/tinymce.min.js"></script>
+
+</div>

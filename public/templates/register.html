@@ -1,0 +1,176 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+
+    <div id="register" class="row">
+        <div class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Register for free</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <form name="registerForm" ng-model="registerForm">
+                        <div class="control-group">
+                            <div class="row-fluid">
+                                <div class="span11">
+                                    <label class="control-label" for="username">Username</label>
+
+                                    <div class="controls">
+                                        <input type="text" ng-model="account.userName" ng-change="OnUsernameChange()"
+                                               name="userName" id="username"
+                                               placeholder="Username" required ng-minlength="5" ng-maxlength="25"
+                                               ng-pattern="/^[a-zA-Z0-9._]*$/">
+
+                                        <div ng-show=" (registerForm.userName.$dirty || submitted) && (!registerForm.userName.$valid)"
+                                             class="alert alert-error">
+                                            Your username may only contain: numbers, letters, underscores and dots with
+                                            a
+                                            minimum length of 5 and a maximum of 25.
+                                        </div>
+
+                                        <div ng-show="(registerForm.userName.$dirty || submitted) && registerForm.userName.$valid && !isCheckingUsernameUnique && !isUsernameUnique"
+                                             class="alert alert-error">
+                                            Someone already registered with this username.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <valid ng-attr-status="(!registerForm.userName.$dirty && !submitted) || (registerForm.userName.$valid && isUsernameUnique && !isCheckingUsernameUnique)"></valid>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="row-fluid">
+                                <div class="span11">
+                                    <label class="control-label" for="email">Email</label>
+
+                                    <div class="controls">
+                                        <input type="email" name="email" ng-model="account.email"
+                                               ng-change="OnEmailChange()" id="email" placeholder="Email"
+                                               required ng-minlength="5"
+                                               ng-maxlength="50">
+
+                                        <div ng-show="(registerForm.email.$dirty || submitted) && (!registerForm.email.$valid)"
+                                             class="alert alert-error">
+                                            Your email must be a valid email adress and may only contain 5 to 50
+                                            characters.
+                                        </div>
+
+                                        <div ng-show="(registerForm.email.$dirty || submitted) && (registerForm.email.$valid && !isEmailUnique)"
+                                             class="alert alert-error">
+                                            Someone already registered with this email address.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <valid ng-attr-status="(!registerForm.email.$dirty && !submitted) || (registerForm.email.$valid && isEmailUnique)"></valid>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="row-fluid">
+                                <div class="span11">
+                                    <label class="control-label" for="password">Password</label>
+
+                                    <div class="controls">
+                                        <input type="password" name="password" ng-model="account.password"
+                                               ng-change="onPasswordChange()" id="password" placeholder="Password"
+                                               required ng-minlength="5"
+                                               ng-maxlength="20">
+
+                                        <div ng-show="(registerForm.password.$dirty || submitted) && (!registerForm.password.$valid)"
+                                             class="alert alert-error">
+                                            Your password must be between 5 and 20 characters long.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <valid ng-attr-status="(!registerForm.password.$dirty && !submitted) || (registerForm.password.$valid)"></valid>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="row-fluid">
+                                <div class="span11">
+                                    <label class="control-label" for="repeatPassword">Repeat password</label>
+
+                                    <div class="controls">
+                                        <input type="password" name="repeatPassword" ng-model="account.repeatPassword"
+                                               id="repeatPassword" ng-change="onPasswordChange()"
+                                               placeholder="Repeat password" required ng-minlength="5"
+                                               ng-maxlength="20">
+
+                                        <div ng-show="(registerForm.repeatPassword.$dirty || submitted) && (!registerForm.repeatPassword.$valid)"
+                                             class="alert alert-error">
+                                            Your password must be between 5 and 20 characters and should match your
+                                            other
+                                            password.
+                                        </div>
+
+                                        <div ng-show="(registerForm.repeatPassword.$dirty || submitted) && (registerForm.repeatPassword.$valid && !hasMatchingPasswords)"
+                                             class="alert alert-error">
+                                            Your passwords should match each other.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <valid ng-attr-status="(!registerForm.repeatPassword.$dirty && !submitted) || (registerForm.repeatPassword.$valid && hasMatchingPasswords)"></valid>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div id="tos" class="control-group">
+                            <div class="row-fluid">
+                                <div class="span11">
+                                    <label class="checkbox">
+                                        <input ng-model="account.tos" type="checkbox" name="tos" required>
+                                        I agree to play nicely with other players.
+                                    </label>
+
+                                    <div ng-show="(registerForm.tos.$dirty || submitted) && (!registerForm.tos.$valid)"
+                                         class="alert alert-error">
+                                        You must accept our terms of agreement if you want to sign up.
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <valid ng-attr-status="(!registerForm.tos.$dirty && !submitted) || (registerForm.tos.$valid)"></valid>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="row-fluid">
+                                <div class="span11">
+                                    <div vc-recaptcha key="'6Lf3FBATAAAAAC7QArA2xTBURkOmuuJofaSy797A'"></div>
+
+                                    <div ng-show="!isValidCaptcha && submitted"
+                                         class="alert alert-error">
+                                        You must resolve the recaptcha.
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <valid ng-attr-status="(isValidCaptcha)"></valid>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button ng-click="registerAccount()" type="button" class="button-small"
+                                        ng-disabled="isRegistering">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="span4">
+            <download></download>
+            <statistics></statistics>
+        </div>
+    </div>
+</div>

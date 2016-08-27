@@ -1,0 +1,61 @@
+<div class="page normal-page container">
+    <div id="characters" class="row-fluid">
+
+        <div class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">My characters</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Level</th>
+                                <th>Sex</th>
+                                <th>Kills</th>
+                                <th>Deaths</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>James</td>
+                                <td>15</td>
+                                <td>Male</td>
+                                <td>115</td>
+                                <td>80</td>
+                                <td><button class="btn btn-xs btn-info"><i class="fa fa-eye"></i> View</button></td>
+                                <td ng-click="openDeleteModal()"><button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Bobby</td>
+                                <td>8</td>
+                                <td>Female</td>
+                                <td>56</td>
+                                <td>30</td>
+                                <td><button class="btn btn-xs btn-info"><i class="fa fa-eye"></i> View</button></td>
+                                <td ng-click="openDeleteModal()"><button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="span4">
+            <account></account>
+        </div>
+
+        <modal id="deleteCharacterModal" title="Delete character">
+            <p>Are you sure you want to delete this character?</p>
+
+            <p>Once you delete a character all related data will also be removed and this cant be undone.</p>
+
+            <button class="btn btn-default btn-xs">Delete character</button>
+        </modal>
+    </div>
+</div>

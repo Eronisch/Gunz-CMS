@@ -1,0 +1,71 @@
+﻿<div id="purchaseShopItem">
+
+    <div id="leftShopItemContent">
+        <div id="imageContainer">
+            <div ng-if="purchaseItemModal.newUnlimitedPrice || purchaseItemModal.newDailyPrice" class="ribbon-wrapper-orange">
+                <div class="ribbon-orange">SALE</div>
+            </div>
+            <img ng-src="/img/donate/{{purchaseItemModal.categoryId}}/{{purchaseItemModal.image}}" alt="Donator item"/>
+        </div>
+        <button id="purchaseBtn" ng-class="{loading : purchaseItemModal.isBuying}"
+                ng-disabled="purchaseItemModal.getHasInvalidBalance() || purchaseItemModal.isBuying"
+                ng-click="purchase(purchaseItemModal.id, purchaseItemModal.name)"
+                class="btn btn-default btn-small nonLoading">Purchase
+        </button>
+    </div>
+
+    <div id="rightShopItemContent">
+        <h4>{{purchaseItemModal.name}}</h4>
+
+        <div id="description">{{purchaseItemModal.description}}</div>
+
+        <div id="items" ng-if="purchaseItemModal.items.length > 1">
+            <a ng-href="/shop/{{item.id}}/item" ng-repeat="item in purchaseItemModal.items" target="_blank">
+                {{item.name}}{{(purchaseItemModal.items.length - $index) > 1 ? ", " : ""}}
+            </a>
+        </div>
+
+        <div id="price"><i class="fa fa-money"></i> <span id="coins">{{purchaseItemModal.getThirtyDayPrice()}} GZF gold  <span
+                id="thirtyDays">(30 Days)</span></span></div>
+    </div>
+
+
+    <div class="clear"></div>
+
+    <hr/>
+
+    <div class="form-group">
+        Select the amount of days you want to purchase the item:
+
+        <select ng-model="purchaseItemModal.purchaseType">
+            <option ng-repeat="type in ITEM_PURCHASE_TYPES" value="{{type.id}}" ng-disabled="purchaseItemModal.isPurchaseTypeDisabled(type.id)">{{type.name}}</option>
+        </select>
+    </div>
+
+    <hr/>
+
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>{{purchaseItemModal.isInSale() ? 'Old Price' : 'Price'}}</th>
+            <th ng-if="purchaseItemModal.isInSale()">New Price</th>
+            <th ng-if="purchaseItemModal.isInSale()">Discount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{purchaseItemModal.name}}</td>
+            <td>{{purchaseItemModal.quantity}}</td>
+            <td><i class="fa fa-money"></i> {{ purchaseItemModal.getOldPrice()}}</td>
+            <td ng-if="purchaseItemModal.isInSale()"><i class="fa fa-money"></i> {{purchaseItemModal.getNewPrice()}}</td>
+            <td ng-if="purchaseItemModal.isInSale()">{{purchaseItemModal.getDiscount()}}%</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="accountBalance">
+        Account balance after purchase: <i class="fa fa-money"></i> {{purchaseItemModal.getAccountBalanceAfter()}}
+    </div>
+</div>

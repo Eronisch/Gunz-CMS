@@ -1,0 +1,84 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="clanRanking" class="page normal-page container">
+
+    <div id="register" class="row">
+        <div class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Ranking</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <input id="searchClanRanking" type="text" ng-change="search()" ng-model="searchText"
+                           placeholder="Name..."/>
+                    <div ng-show="!isLoaded" class="loadingWrapper">
+                        <div class="loadingGear"></div>
+                    </div>
+
+                    <div ng-show="isLoaded">
+                        <table class="table table-response table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Emblem</th>
+                                <th>Name</th>
+                                <th>Wins</th>
+                                <th>Draws</th>
+                                <th>Losses</th>
+                                <th>Points</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-if="clans.length === 0">
+                                <td colspan="8">There are clans yet.</td>
+                            </tr>
+                            <tr ng-repeat="clan in clans">
+                                <td>
+                        <span ng-if="$index === 0">
+                            <img src="/img/trophies/gold.png"/>
+                        </span>
+                        <span ng-if="$index === 1">
+                            <img src="/img/trophies/silver.png"/>
+                        </span>
+                        <span ng-if="$index === 2">
+                            <img src="/img/trophies/bronze.png"/>
+                        </span>
+                        <span ng-if="$index > 2">
+                            {{$index + 1}}
+                        </span>
+                                </td>
+                                <td>
+                                    <img class="emblem"
+                                         ng-src="{{clan.EmblemUrl}}"/>
+                                </td>
+                                <td><a ng-href="/clan/view/{{clan.Clid}}">{{clan.Name}}</a></td>
+                                <td>{{clan.Wins}}</td>
+                                <td>{{clan.Draws}}</td>
+                                <td>{{clan.Losses}}</td>
+                                <td>{{clan.Point}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <div class="viewing pull-left">
+                                Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amount}}
+                            </div>
+
+                            <div class="pagination pull-right"></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span4">
+            <account></account>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/clanRanking.css"/>

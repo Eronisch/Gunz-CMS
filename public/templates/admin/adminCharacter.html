@@ -1,0 +1,105 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminCharacter" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Character administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+            <input type="text" class="form-control" placeholder="Name, cid, aid..." ng-model="searchText"
+                   ng-change="search()"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Avatar</th>
+                    <th>Aid</th>
+                    <th>Cid</th>
+                    <th>Player</th>
+                    <th>Sex</th>
+                    <th>Level</th>
+                    <th>EXP</th>
+                    <th></th>
+                    <!--<th>Kills</th>
+                    <th>Deaths</th>
+                    <th>K/d</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="player in players" ng-click="navigateToCharacterPage(player.Cid)">
+                    <td><img ng-if="player.AvatarUrl" ng-src="{{player.AvatarUrl}}"/>
+                        <span ng-if="!player.AvatarUrl">None</span></td>
+                    <td>{{player.Aid}}</td>
+                    <td>{{player.Cid}}</td>
+                    <td>{{player.Name}}</td>
+                    <td>{{player.Sex === 0 ? "Male" : "Female"}}</td>
+                    <td>{{player.Level}}</td>
+                    <td>{{player.Xp}}</td>
+                   <!-- <td>{{player.KillCount}}</td>
+                    <td>{{player.DeathCount}}</td>
+                    <td>{{player.Kd}}%</td>-->
+                    <td>
+                        <button class="btn btn-default btn-xs" ng-click="showEditCharacterModal(player)">Edit</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div class="viewing pull-left">
+                    Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amountCharacters}}
+                </div>
+
+                <div class="pagination pull-right"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <modal id="editCharacterModal" title="Edit character">
+        <form ng-submit="editCharacterRecord()">
+
+            <div class="control-group">
+                <label>Name</label>
+                <input type="text" ng-model="models.editCharacter.name" placeholder="Name..." required
+                       ng-maxlength="24"/>
+            </div>
+
+            <div class="control-group">
+                <label>Kill count</label>
+                <input type="number" ng-model="models.editCharacter.killCount" placeholder="Name..." required
+                       ng-maxlength="24"/>
+            </div>
+
+            <div class="control-group">
+                <label>Death count</label>
+                <input type="number" ng-model="models.editCharacter.deathCount" placeholder="Name..." required
+                       ng-maxlength="24"/>
+            </div>
+
+            <div class="control-group">
+                <label>Red Color</label>
+                <input type="text" ng-model="models.editCharacter.redColor" placeholder="Name..." required
+                       ng-maxlength="24"/>
+            </div>
+
+            <div class="control-group">
+                <label>Green Color</label>
+                <input type="text" ng-model="models.editCharacter.greenColor" placeholder="Name..." required
+                       ng-maxlength="24"/>
+            </div>
+
+            <div class="control-group">
+                <label>Blue Color</label>
+                <input type="text" ng-model="models.editCharacter.blueColor" placeholder="Name..." required
+                       ng-maxlength="24"/>
+            </div>
+            <input type="submit" ng-disabled="loaders.isSavingCharacter" class="btn btn-default"
+                   value="Edit character"/>
+        </form>
+    </modal>
+
+</div>
+
+<link href="/css/adminCharacter.css" rel="stylesheet"/>

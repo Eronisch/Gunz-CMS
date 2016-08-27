@@ -1,0 +1,141 @@
+﻿<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+
+    <div class="row">
+
+       <div ng-show="paySafeCard.hasSubmitted && !paySafeCard.isSuccess" class="span12">
+           <div class="alert alert-danger">
+               An error occurred while submitting your paysafecard, please try again later.
+           </div>
+       </div>
+
+        <div ng-show="paySafeCard.hasSubmitted && paySafeCard.isSuccess" class="span12">
+            <div class="alert alert-success">
+                We have succesfully received your paysafecard purchase. When your paysafecard has been validated by a staff member your GZF gold  will be send to you.
+            </div>
+        </div>
+
+        <div id="donate" class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Donate</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    GunzFactor GunZ is a free game. We do not have customers - people who make payments to our server
+                    are considered donations.
+                    Every payment is considered as a donation.
+                    When GZF gold  is gifted to the wrong account, we do not take responsibility and we will not restore your
+                    GZF gold .
+                    Donations are not refundable. Users that do a charge back, will be banned immediately.
+                    Donation items will NOT be changed to other items (item exchange) and neither will they be moved to
+                    other accounts.
+                    We have the right to change donation items (statistics) or remove donation items from the game
+                    without notice at any time.
+
+                    <br/><br/>
+                    By donating you agree with all of these points.
+                    <br/><br/>
+                    If you have any inquiries, please open up a topic on the forum.
+
+                    <hr/>
+
+                    <h4>Choose your payment method</h4>
+
+                    <img src="/img/payments/paypal.png" alt="PayPal" ng-click="togglePayPal()"
+                         ng-class="{inactive : !isPayPalVisible}"/>
+                    <img id="paySafeCardImg" src="/img/payments/paysafecard.png" alt="Paysafecard"
+                         ng-click="togglePaySafeCard()" ng-class="{inactive : !paySafeCard.isVisible}"/>
+
+                    <div ng-show="isPayPalVisible">
+                        <div class="paymentDescription">
+                            Buying GZF gold  could not be any simpler with PayPal. Using PayPal your GZF gold  will be instantly
+                            transferred upon completing the process of buying GZF gold . Get started by simply selecting a
+                            quantity and continuing your transaction on PayPal.
+                            When you click on one the buttons below you will be redirected to PayPal.
+                        </div>
+
+                        <form method="POST" action="/paypal/create" novalidate>
+                            <input type="hidden" value="1" name="paymentMethodOptionId"/>
+                            <input type="submit" ng-disabled="!isLoggedIn" class="button-extrasmall nonLoading"
+                                   value="50 GZF Gold - $5"/>
+                        </form>
+
+                        <form method="POST" action="/paypal/create" novalidate>
+                            <input type="hidden" value="2" name="paymentMethodOptionId"/>
+                            <input type="submit" ng-disabled="!isLoggedIn" class="button-extrasmall nonLoading"
+                                   value="100 GZF Gold - $10"/>
+                        </form>
+
+                        <form method="POST" action="/paypal/create" novalidate>
+                            <input type="hidden" value="3" name="paymentMethodOptionId"/>
+                            <input type="submit" ng-disabled="!isLoggedIn" class="button-extrasmall nonLoading"
+                                   value="300 GZF Gold - $25"/>
+                        </form>
+
+                        <form method="POST" action="/paypal/create" novalidate>
+                            <input type="hidden" value="4" name="paymentMethodOptionId"/>
+                            <input type="submit" ng-disabled="!isLoggedIn" class="button-extrasmall nonLoading"
+                                   value="750 GZF Gold - $50"/>
+                        </form>
+                    </div>
+
+                    <div id="paySafeCard" ng-show="paySafeCard.isVisible">
+                        <div class="paymentDescription">
+                            You can purchase paysafecards from lots of stores.
+                            Each card contains an unique id which you need to fill in into the website when you want to
+                            donate to us.
+                            We will then verify your card and check if the card contains enough money for your purchase.
+                            This process is not automatic and may take up to 48 hours.
+                        </div>
+
+                        <button class="button-extrasmall nonLoading" ng-click="openPaySafeCardModal(1)"
+                                ng-disabled="!isLoggedIn">50 GZF Gold - $5
+                        </button>
+                        <button class="button-extrasmall nonLoading" ng-click="openPaySafeCardModal(2)"
+                                ng-disabled="!isLoggedIn">100 GZF Gold - $10
+                        </button>
+                        <button class="button-extrasmall nonLoading" ng-click="openPaySafeCardModal(3)"
+                                ng-disabled="!isLoggedIn">300 GZF Gold - $25
+                        </button>
+                        <button class="button-extrasmall nonLoading" ng-click="openPaySafeCardModal(4)"
+                                ng-disabled="!isLoggedIn">750 GZF Gold - $50
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span4">
+            <account></account>
+        </div>
+    </div>
+
+    <modal id="paySafeCardModal" title="Paysafecard donate">
+
+        <div id="paySafeCardWarning"><i class="fa fa-warning"></i> Do note that using invalid card codes may result in a
+            temporary ban.
+        </div>
+
+        <form ng-submit="purchasePaySafeCard()">
+            <div class="control-group">
+                <label>GZF gold </label>
+                <select id="cashSelect" ng-model="paySafeCard.paymentOptionId">
+                    <option value="1">50 GZF Gold - $5</option>
+                    <option value="2">100 GZF Gold - $10</option>
+                    <option value="3">300 GZF Gold - $25</option>
+                    <option value="4">750 GZF Gold - $50</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Code</label>
+                <input ng-model="paySafeCard.code" type="text" placeholder="Your code..." maxlength="100" required/>
+            </div>
+            <input ng-disabled="paySafeCard.isSubmitting" type="submit" class="btn btn-default btn-xs" value="Submit"/>
+        </form>
+    </modal>
+</div>
+
+<link href="/css/donate.css" rel="stylesheet"/>

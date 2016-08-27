@@ -1,0 +1,111 @@
+﻿<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div class="page normal-page container">
+
+    <div ng-show="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+
+    <div ng-show="successMessage" class="alert alert-success">
+        {{successMessage}}
+    </div>
+
+    <div class="row">
+        <div id="donatorShopItem" class="span8">
+            <div class="widget">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">{{donator.Name}}</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <div id="leftSide">
+                        <div id="imageContainer" ng-class="{horizontal : isHorizontalImage}">
+                            <div ng-if="donator.NewForeverPrice || donator.NewDailyPrice" class="ribbon-wrapper-orange">
+                                <div class="ribbon-orange">SALE</div>
+                            </div>
+                            <img id="shopItem" ng-src="/img/donate/{{donator.CategoryId}}/{{donator.Image}}"
+                                 alt="Item"/>
+                        </div>
+
+                        <button ng-if="account" id="buyBtn" ng-click="shopItemControl.openModal(donator.Id)"
+                                class="button-extrasmall">Buy
+                        </button>
+
+                        <div class="clear"></div>
+
+                        </div>
+
+                    <div id="rightSide">
+                        <h4>{{donator.Name}}</h4>
+
+                        <div class="description">{{donator.Description}}</div>
+                        <ul id="requirements">
+                            <li>
+                                <div class="subject">Sex:</div>
+                                <div ng-if="donator.Sex == null" class="item">Unisex</div>
+                                <div ng-if="donator.Sex === 0" class="item">Male</div>
+                                <div ng-if="donator.Sex === 1" class="item">Female</div>
+                            </li>
+                            <li>
+                                <div class="subject">Weight:</div>
+                                <div class="item">{{donator.Weight}}</div>
+                            </li>
+                            <li>
+                                <div class="subject">Price:</div>
+                                <div class="item"><i class="fa fa-money"></i> {{donator.getThirtyDayPrice()}} GZF gold </div>
+                            </li>
+                            <li class="setItems" ng-if="donator.items.length > 0">
+                                <div class="subject">Includes:</div>
+                                <a ng-repeat="includedItem in donator.items" ng-href="/shop/{{includedItem.Id}}/item">{{includedItem.Name}}<span ng-if="(donator.items.length - $index) > 1">,&nbsp;</span></a>
+
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <hr/>
+
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Damage</th>
+                            <th>Delay</th>
+                            <th>Magazine</th>
+                            <th>Max Bullet</th>
+                            <th>Max Weight</th>
+                            <th>Reload Time</th>
+                            <th>HP</th>
+                            <th>AP</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{donator.Damage}}</td>
+                            <td>{{donator.Delay}} ms</td>
+                            <td>{{donator.Magazine}}</td>
+                            <td>{{donator.MaxBullet}}</td>
+                            <td>{{donator.MaxWeight}}</td>
+                            <td>{{donator.ReloadTime}} sec</td>
+                            <td>{{donator.Hp}}</td>
+                            <td>{{donator.Ap}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <account control="accountControl"></account>
+        </div>
+    </div>
+
+    <modal id="buyModal" title="Purchase item">
+        <purchaseshopitem ng-attr-modal-id="buyModal" control="shopItemControl"
+                          onpurchase="onPurchase"></purchaseshopitem>
+    </modal>
+
+    <link rel="stylesheet" type="text/css" href="/css/shopItem.css"/>
+</div>

@@ -1,0 +1,1 @@
+jx package app.js "Revolution Web" -slim public,config.js,node_modules

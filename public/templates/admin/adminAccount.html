@@ -1,0 +1,102 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminAccount" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Admin administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+            <div class="actions">
+                <input type="button" class="button-extrasmall pull-right" value="Add GZF gold " ng-click="openCashModal()"/>
+                <input type="button" class="button-extrasmall pull-right margin-10-right" value="Ban" ng-click="openBanModal()"/>
+                <div class="clear"></div>
+            </div>
+            <input type="text" class="form-control" placeholder="Name, email, aid, userid" ng-model="searchText"
+                   ng-change="search()"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Avatar</th>
+                    <th>AID</th>
+                    <th>UserId</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>UGradeId</th>
+                    <th>PGradeId</th>
+                    <th>Registration</th>
+                    <th>GZF gold </th>
+                    <th>Event Coins</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="account in accounts">
+                    <td>
+                        <img ng-if="account.AvatarUrl" ng-src="{{account.AvatarUrl}}"/>
+                        <span ng-if="!account.AvatarUrl">None</span>
+                    <td>{{account.AID}}</td>
+                    <td>{{account.UserID}}</td>
+                    <td>{{account.Name}}</td>
+                    <td>{{account.Email}}</td>
+                    <td>{{account.UGradeID}}</td>
+                    <td>{{account.PGradeID}}</td>
+                    <td>{{account.RegDate}}</td>
+                    <td>{{account.DonationCoins}}</td>
+                    <td>{{account.EventCoins}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div class="viewing pull-left">
+                    Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amount}}
+                </div>
+
+                <div class="pagination pull-right"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <modal id="cashModal" title="Add GZF gold ">
+
+        <div class="control-group">
+            <label>Username</label>
+            <input type="text" ng-model="cash.userId" placeholder="UserId" required/>
+        </div>
+
+        <div class="control-group">
+            <label>GZF gold </label>
+            <input type="number" ng-model="cash.cash" placeholder="Amount" min="1" required/>
+        </div>
+
+        <div ng-show="cash.hasError" class="alert alert-danger">
+            The user doesn't exist.
+        </div>
+
+        <button ng-disabled="cash.isLoading" ng-click="addCash()" class="btn btn-default btn-small">Add GZF gold </button>
+    </modal>
+
+    <modal id="banModal" title="Ban user">
+
+        <div class="control-group">
+            <label>Username</label>
+            <input type="text" ng-model="banModel.userId" placeholder="UserId" required/>
+        </div>
+
+        <div class="control-group">
+            <label>Date</label>
+            <input type="text" ng-model="banModel.date" placeholder="YYYY-MM-dd" required/>
+        </div>
+
+        <div ng-show="banModel.hasError" class="alert alert-danger">
+            The user doesn't exist.
+        </div>
+
+        <button ng-disabled="banModel.isLoading" ng-click="ban()" class="btn btn-default btn-small">Ban</button>
+    </modal>
+
+</div>
+
+<link href="/css/adminAccount.css" rel="stylesheet"/>

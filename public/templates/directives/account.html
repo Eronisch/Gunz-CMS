@@ -1,0 +1,43 @@
+﻿<div id="loginHome">
+    <div class="title-wrapper">
+        <h3 class="widget-title">Account</h3>
+
+        <div class="clear"></div>
+    </div>
+    <div class="wcontainer">
+
+        <div ng-show="!isLoaded" class="loadingWrapper">
+            <div class="loadingGear"></div>
+        </div>
+
+        <div ng-show="isLoaded">
+            <div id="clanEmblem">
+                <img ng-src="{{account.AvatarUrl}}" alt="Avatar"/>
+            </div>
+
+            <div id="info">
+                <ul>
+                    <li><span class="welcome">Welcome</span>, <span class="username">{{account.UserID}}</span></li>
+                    <li><span class="subject">GZF gold :</span> {{account.DonationCoins}}</li>
+                    <li><span class="subject">Event coins:</span> {{account.EventCoins}}</li>
+                </ul>
+            </div>
+
+            <div class="clear"></div>
+
+            <div id="buttons">
+                <a href="/account" class="button-extrasmall"><i class="fa fa-user"></i> Account</a>
+                <a href="/account/clans" class="button-extrasmall"><i class="fa fa-group"></i> Clan</a>
+                <a href="/donate" class="button-extrasmall"><i class="fa fa-heart"></i> Donate</a>
+                <a ng-disabled="isLoggingOut" ng-click="logOut()" class="button-extrasmall"><i
+                        class="fa fa-sign-out"></i> Logout</a>
+            </div>
+
+            <div ng-show="account.UGradeID >= 252">
+                <a href="/admin" class="button-extrasmall btn-block adminBtn">Admin panel</a>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

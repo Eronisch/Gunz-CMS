@@ -1,0 +1,102 @@
+<div id="statistics" class="widget">
+    <div class="title-wrapper">
+        <h3 class="widget-title">Statistics</h3>
+
+        <div class="clear"></div>
+    </div>
+    <div class="wcontainer">
+
+        <div ng-show="!isLoaded" class="loadingWrapper">
+            <div class="loadingGear"></div>
+        </div>
+
+        <div ng-show="isLoaded">
+
+            <div class="row-fluid">
+
+                <ul ng-if="!multipleLine">
+                    <li>
+                        <i class="fa fa-signal"></i> <span class="option">Server status:</span>
+                        <span ng-if="serverStatus.server.isOnline" class="online">Online</span>
+                        <span ng-if="!serverStatus.server.isOnline" class="offline">Offline</span>
+                    </li>
+                    <li><i class="fa fa-users"></i> <span class="option">Users online:</span>
+                        {{serverStatus.server.currPlayer}}/{{serverStatus.server.maxPlayer}}
+                    </li>
+                    <li><i class="fa fa-heart"></i> <span class="option">Most online ever:</span>
+                        {{serverStatus.server.amountMostOnlineUsers}}
+                    </li>
+                    <li><i class="fa fa-rocket"></i> <span class="option">Most online today:</span>
+                        {{serverStatus.server.amountMostOnlineUsersToday}}
+                    </li>
+                    <li><i class="fa fa-tachometer"></i> <span class="option">Accounts created:</span>
+                        {{serverStatus.server.amountAccounts}}
+                    </li>
+                    <li><i class="fa fa-shield"></i> <span class="option">Clans created:</span>
+                        {{serverStatus.server.amountClans}}
+                    </li>
+                    <li>
+                        <i class="fa fa-user-plus"></i> <span class="option">Characters created:</span>
+                        {{serverStatus.character.amountCharactersRegistered}}
+                    </li>
+                    <li>
+                        <i class="fa fa-flash"></i> <span class="option">Newest character:</span>
+                        {{serverStatus.character.newestCharacter}}
+                    </li>
+                    <li><i class="fa fa-star"></i> <span class="option">Most addicted:</span>
+                        {{serverStatus.character.mostAddictedCharacter}}
+                    </li>
+                </ul>
+
+                <ul ng-if="multipleLine">
+                    <li>
+                        <div class="span4">
+                            <i class="fa fa-signal"></i> <span class="option">Server status:</span>
+                            <span ng-if="serverStatus.server.isOnline" class="online">Online</span>
+                            <span ng-if="!serverStatus.server.isOnline" class="offline">Offline</span>
+                        </div>
+                        <div class="span4">
+                            <i class="fa fa-users"></i> <span class="option">Users online:</span>
+                            {{serverStatus.server.currPlayer}}/{{serverStatus.server.maxPlayer}}
+                        </div>
+                        <div class="span4">
+                            <i class="fa fa-heart"></i> <span class="option">Most online ever:</span>
+                            {{serverStatus.server.amountMostOnlineUsers}}
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <div class="span4">
+                            <i class="fa fa-rocket"></i> <span class="option">Most online today:</span>
+                            {{serverStatus.server.amountMostOnlineUsersToday}}
+                        </div>
+                        <div class="span4">
+                            <i class="fa fa-tachometer"></i> <span class="option">Accounts created:</span>
+                            {{serverStatus.server.amountAccounts}}
+                        </div>
+                        <div class="span4">
+                            <i class="fa fa-shield"></i> <span class="option">Clans created:</span>
+                            {{serverStatus.server.amountClans}}
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <div class="span4">
+                            <i class="fa fa-user-plus"></i> <span class="option">Characters created:</span>
+                            {{serverStatus.character.amountCharactersRegistered}}
+                        </div>
+                        <div class="span4">
+                            <i class="fa fa-flash"></i> <span class="option">Newest character:</span>
+                            {{serverStatus.character.newestCharacter}}
+                        </div>
+                        <div class="span4">
+                            <i class="fa fa-star"></i> <span class="option">Most addicted:</span>
+                            {{serverStatus.character.mostAddictedCharacter}}
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

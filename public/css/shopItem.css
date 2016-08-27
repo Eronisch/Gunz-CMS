@@ -1,0 +1,89 @@
+﻿#donatorShopItem #leftSide{
+    margin-right:20px;
+    float: left;
+}
+
+#donatorShopItem #imageContainer {
+    -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    border: 1px solid #000;
+    background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: linear-gradient(to top, #1a1b1f, #212528);
+    position: relative;
+    padding: 12px;
+}
+
+    #donatorShopItem #imageContainer img {
+        border: 1px solid #232323;
+        padding: 6px;
+        border-radius: 8px;
+        background-color: #0F1215;
+        min-height: 100px;
+    }
+
+    #donatorShopItem #imageContainer.horizontal {
+        margin-bottom: 20px;
+        margin-right: 0;
+        float: none;
+    }
+
+        #donatorShopItem #imageContainer.horizontal img {
+            width: 100%;
+            min-height: default;
+            box-sizing: border-box;
+        }
+
+#donatorShopItem h4 {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+#donatorShopItem hr {
+    margin: 11px 0;
+    padding: 0;
+    border-top: 1px dashed #ccc;
+}
+
+#donatorShopItem th {
+    padding-top: 0;
+}
+
+#donatorShopItem #requirements {
+    margin-top: 3px;
+}
+
+    #donatorShopItem #requirements li {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+        #donatorShopItem #requirements li .subject {
+            color: #1E8A22;
+            display: inline;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        #donatorShopItem #requirements li .item {
+            display: inline;
+            font-size: 11px;
+        }
+
+#donatorShopItem #buyBtn {
+    margin-top: 20px;
+}
+
+#donatorShopItem #imageContainer {
+    position: relative;
+}
+
+#donatorShopItem .setItems a{
+    font-size: 11px;
+    color: #777;
+    text-decoration: underline;
+}

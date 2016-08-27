@@ -1,0 +1,48 @@
+﻿<div>
+    <div class="title-wrapper">
+        <h3 class="widget-title">Login</h3>
+
+        <div class="clear"></div>
+    </div>
+    <div class="wcontainer">
+        <form id="loginForm" name="loginForm" ng-model="loginForm" ng-submit="login()" novalidate>
+            <div class="control-group">
+                <label class="control-label" for="username">Username</label>
+
+                <div class="controls">
+                    <input type="text" ng-model="loginModel.username"
+                           name="username" id="username" placeholder="Username">
+
+                    <div ng-show="loginSubmitted && loginTypes.invalidDetails === loginResult"
+                         class="alert alert-error">
+                        No account found with the given username and password.
+                    </div>
+
+                    <div ng-show="loginSubmitted && loginTypes.blocked === loginResult"
+                         class="alert alert-error">
+                        Your account has been blocked.
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+
+                <div class="controls">
+                    <input type="password" name="password" ng-model="loginModel.password"
+                           id="password" placeholder="Password">
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <a href="/request-username">Request username</a>
+                | <a href="/reset-password">Reset password</a>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" class="button-small" ng-disabled="isLoggingIn" value="Login"</input>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

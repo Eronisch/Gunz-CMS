@@ -1,0 +1,92 @@
+<div class="page normal-page container">
+
+    <div id="clanMembers">
+
+        <clanheader ng-attr-tab="members"></clanheader>
+
+        <div id="main" class="row-fluid">
+
+            <div class="span8">
+                <div class="widget">
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">Members</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+                        <table class="table responsive table-striped">
+                            <thead>
+                                <tr>
+                                    <th ng-if="isOwner"></th>
+                                    <th>Avatar</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                    <th>Kd</th>
+                                    <th>Kilss</th>
+                                    <th>Deaths</th>
+                                    <th>Last online</th>
+                                    <th ng-if="isOwner"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="members.length === 0">
+                                    <td colspan="8">There are no members yet.</td>
+                                </tr>
+                                <tr ng-repeat="member in members">
+                                    <td ng-if="isOwner"><input ng-model="member.isSelected" checked="isUsernameSelected(member.CharacterName)" ng-change="updateCheckStatus($index, member.Character.Name)" type="checkbox" /></td>
+                                    <td>
+                                        <img ng-src="{{member.Character.AvatarUrl}}" />
+                                    </td>
+                                    <td ng-if="member.Grade === 1" class="leader"><a ng-href="/character/view/{{member.Character.Cid}}">{{member.Character.Name}}</a></td>
+                                    <td ng-if="member.Grade === 2" class="admin"><a ng-href="/character/view/{{member.Character.Cid}}">{{member.Character.Name}}</a></td>
+                                    <td ng-if="member.Grade === 9"><a ng-href="/character/view/{{member.Character.Cid}}">{{member.Character.Name}}</a></td>
+                                    <td>{{member.Character.Level}}</td>
+                                    <td>{{member.Character.Kd}}%</td>
+                                    <td>{{member.Character.KillCount}}</td>
+                                    <td>{{member.Character.DeathCount}}</td>
+                                    <td>{{member.Character.LastTime}}</td>
+                                    <td ng-if="isOwner">
+                                        <button ng-if="member.Grade === 9" class="btn btn-mini btn-danger" ng-click="openPromoteModal(member.Character.Cid, member.Character.Name)"><i class="fa fa-thumbs-up"></i> Promote</button>
+                                        <button ng-if="member.Grade === 2" class="btn btn-mini btn-warning" ng-click="openDemoteModal(member.Character.Cid, member.Character.Name)"><i class="fa fa-thumbs-up"></i> Demote</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button ng-if="isOwner" ng-click="showDeleteModal()" id="removeSelected" class="button-extrasmall"><i class="fa fa-trash"></i> Remove selected </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="span4">
+                <clan></clan>
+            </div>
+        </div>
+
+        <modal id="deleteMembersModal" title="Delete members">
+            <p>Are you sure you want to delete the following members:</p>
+
+            <ul>
+                <li ng-if="deleteMembersInfo.selected.length === 0">You haven't select any members to delete.</li>
+                <li ng-repeat="member in deleteMembersInfo.selected">{{member.Character.Name}}</li>
+            </ul>
+
+            <button ng-class="{'loading' : deleteMembersInfo.isSubmitted}" ng-disabled="deleteMembersInfo.isSubmitted || deleteMembersInfo.selected.length === 0" ng-click="deleteMembers()" class="btn btn-default btn-small nonLoading">Delete members</button>
+        </modal>
+
+        <modal id="promoteMemberModal" title="Promote member">
+            <p>Are you sure you want to promote: "{{promoteMemberInfo.username}}"</p>
+
+            <button ng-disabled="promoteMemberInfo.isSubmitted" ng-click="promoteMember()" class="btn btn-default btn-small">Promote</button>
+        </modal>
+
+        <modal id="demoteMemberModal" title="Demote member">
+            <p>Are you sure you want to demote: "{{demoteMemberInfo.username}}"</p>
+
+            <button ng-disabled="demoteMemberInfo.isSubmitted" ng-click="demoteMember()" class="btn btn-default btn-small">Demote</button>
+        </modal>
+
+    </div>
+    <link rel="stylesheet" type="text/css" href="/css/clanMembers.css" />
+</div>

@@ -1,0 +1,83 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminAccount" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Admin administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+
+            <div>
+                <button ng-click="showAddModal()" class="button-extrasmall pull-right">Add item</button>
+                <div class="clear"></div>
+            </div>
+
+            <div class="row-fluid margin-top">
+                <div class="span6">
+                    <select ng-model="selectRotation.model.month" ng-change="changeFilter()">
+                        <option ng-repeat="month in selectRotation.months" ng-value="month">{{month}}</option>
+                    </select>
+                </div>
+
+                <div class="span6">
+                    <select ng-model="selectRotation.model.year" ng-change="changeFilter()">
+                        <option ng-repeat="year in selectRotation.years" ng-value="year">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ItemId</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in selectRotation.items">
+                    <td>{{item.ItemId}}</td>
+                    <td><button class="btn btn-xs btn-danger>" ng-click="showConfirmDelete(item)">Delete</button></td>
+                </tr>
+                <tr ng-show="selectRotation.items.length === 0">
+                    <td colspan="3">No items found.</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <modal id="deleteItemModal" title="Confirm delete">
+
+       <p>Are you sure you want to delete the following item: {{selectRotation.deleteItem.ItemId}}?</p>
+
+        <button ng-disabled="selectRotation.isLoading" ng-click="deleteItem(selectRotation.deleteItem.Id)" class="btn btn-default btn-small">Remove item</button>
+    </modal>
+
+    <modal id="addItemRotation" title="Add item">
+        <form ng-submit="addItem()">
+            <div class="control-group">
+                <label>Item ID</label>
+                <input type="number" ng-model="selectRotation.addModel.itemId" placeholder="Item ID..." required/>
+            </div>
+            <div class="control-group">
+                <label>Year</label>
+                <input type="number" ng-model="selectRotation.addModel.year" placeholder="Year..." required/>
+            </div>
+            <div class="control-group">
+                <label>Month</label>
+                <select ng-model="selectRotation.addModel.month" placeholder="Month..." required>
+                    <option ng-repeat="month in selectRotation.months" ng-value="month">{{month}}</option>
+                </select>
+            </div>
+            <input type="submit" ng-disabled="selectRotation.isLoading" class="btn btn-default" value="Add item"/>
+        </form>
+    </modal>
+
+
+</div>
+
+<link href="/css/adminAccount.css" rel="stylesheet"/>

@@ -1,0 +1,93 @@
+﻿<div id="clanHeader" class="hidden-phone">
+
+    <i id="editHeader" ng-if="isOwner" ng-click="openHeaderModal()" class="fa fa-edit"></i>
+
+    <div id="clanBox">
+        <div id="emblem" class="blackGradient">
+            <img ng-src="{{clan.EmblemUrl}}" alt="Clan logo"/>
+            <i ng-if="isOwner" id="editAvatar" ng-click="openAvatarModal()" class="fa fa-edit"></i>
+        </div>
+
+        <div id="clanName" class="blackGradient">
+            <span id="notEditableName">{{clan.Name}}</span>
+            <i ng-if="isOwner" id="editClanName" ng-click="openNameModal()" class="fa fa-edit"></i>
+        </div>
+    </div>
+
+    <div>
+        <ul class="customTabs">
+            <li class="blackGradient" ng-class="{active : tab === 'home'}"><a ng-href="/clan/view/{{clan.ClanId}}"><i
+                    class="fa fa-gamepad"></i> Clan</a></li>
+            <li class="blackGradient" ng-class="{active : tab === 'members'}"><a
+                    ng-href="/clan/view/{{clan.ClanId}}/members"><i class="fa fa-group"></i> Members</a></li>
+            <li class="blackGradient" ng-class="{active : tab === 'matches'}"><a
+                    ng-href="/clan/view/{{clan.ClanId}}/matches"><i class="fa fa-bolt"></i> Matches</a></li>
+        </ul>
+    </div>
+
+    <img id="background" ng-src="{{clan.HeaderUrl ? clan.HeaderUrl : '/img/clanHeader2.png'}}" alt="Header clan"/>
+
+    <modal id="editHeaderModal" title="Upload a new header">
+        <p>Please select an image to be your new header.</p>
+
+        <p>Once you have selected an image it will be validated and if the image seems to be okay it will be updated and
+            immediatly visible.</p>
+        <input id="headerFile" type="file" on-file-upload-change="onHeaderChange" hidden/>
+
+        <div ng-show="editHeaderInfo.isSubmitted && editHeaderInfo.imageStatus === imageStatus.TooLarge"
+             class="alert alert-danger">
+            The image can't exceed 5MB.
+        </div>
+
+        <div ng-show="editHeaderInfo.isSubmitted && editHeaderInfo.imageStatus === imageStatus.InvalidImage"
+             class="alert alert-danger">
+            You can only upload: PNG, JPG, JPEG, GIF.
+        </div>
+
+        <button ng-disabled="editHeaderInfo.isSubmitted" ng-click="selectHeader()" class="btn btn-default btn-small">
+            Choose image
+        </button>
+    </modal>
+
+    <modal id="editNameModal" title="Edit your clan name">
+        <p>Choose a new name for your clan.</p>
+
+        <div class="form-group">
+            <input type="text" ng-model="editNameInfo.name" class="form-control" placeholder="Name"/>
+        </div>
+
+        <div ng-show="editNameInfo.submitted && !editNameInfo.isUnique" class="alert alert-danger">
+            This clan name already exists.
+        </div>
+
+        <div ng-show="editNameInfo.submitted && !editNameInfo.isNameValid" class="alert alert-danger">
+            The name can't be longer than 24 characters.
+        </div>
+
+        <button ng-disabled="editNameInfo.disabled" ng-click="updateName()" class="btn btn-default btn-small">Update
+        </button>
+    </modal>
+
+    <modal id="editAvatarModal" title="Upload a new avatar">
+        <p>Please select an image to be your new avatar.</p>
+
+        <p>Once you have selected an image it will be validated and if the image seems to be okay it will be updated and
+            immediatly visible.</p>
+
+        <input id="emblemFile" type="file" on-file-upload-change="onEmblemChange" hidden/>
+
+        <div ng-show="editAvatarInfo.isSubmitted && editAvatarInfo.imageStatus == imageStatus.TooLarge"
+             class="alert alert-danger">
+            The image can't exceed 2.5MB.
+        </div>
+
+        <div ng-show="editAvatarInfo.isSubmitted && editAvatarInfo.imageStatus == imageStatus.InvalidImage"
+             class="alert alert-danger">
+            You can only upload: PNG, JPG, JPEG, GIF.
+        </div>
+
+        <button ng-disabled="editAvatarInfo.isSubmitted" ng-click="selectEmblem()" class="btn btn-default btn-small">
+            Choose image
+        </button>
+    </modal>
+</div>

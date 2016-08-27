@@ -1,0 +1,253 @@
+<div class="page normal-page container">
+    <div ng-show="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+
+    <div ng-show="successMessage" class="alert alert-success">
+        {{successMessage}}
+    </div>
+
+    <div class="row">
+        <div class="span8">
+            <div class="block block-shortcode_block first cf visible-desktop visible-tablet">
+                <div class="mcontainer">
+                    <div id="movieContainer">
+                        <div id="movieOverlay"></div>
+
+                        <div id="movieContent">
+                            <div id="title">Join the community, enjoy the oldschool gaming.</div>
+                            <div id="description">The ultimate gaming experience</div>
+
+                            <div id="joinContent">
+                                <a id="join" href="/register">
+                                    Join GunzFactor Today! <i class="fa fa-sign-in"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="movieBottomContent">
+                            <img id="gunzRender" src="/img/gunz-render-video.png"/>
+
+                            <div id="why">Default exp rates, Weekly events, active staff</div>
+                        </div>
+                        <video id="movie" width="1000" height="800" controls="false" muted="true" autoplay loop>
+                            <source src="/videos/GunZVideo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="span6 first cf">
+                    <playerranking ng-cloak></playerranking>
+                </div>
+
+
+                <div class="span6">
+                    <clanranking ng-cloak></clanranking>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <!-- Shop -->
+            <div id="shop" class="widget" ng-cloak>
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Shop</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <div ng-show="!isShopLoaded" class="loadingWrapper">
+                        <div class="loadingGear"></div>
+                    </div>
+
+                    <div ng-show="isShopLoaded">
+                        <div ng-if="donatorItems.length === 0">There are no donator items yet.</div>
+                        <div ng-show="donatorItems.length > 0" id="itemShopCarousel" class="owl-carousel">
+                            <div ng-repeat="item in donatorItems" class="item">
+                                <a href="/shop/{{item.Id}}/item">
+                                    <img ng-src="img\donate\{{item.CategoryId}}\{{item.Image}}" alt="Donator item"/>
+
+                                    <div class="itemName">{{item.Item.Name}}</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block first threads" ng-cloak>
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Announcements</h3>
+
+                    <div class="clear"></div>
+                </div>
+
+                <div class="wcontainer">
+
+                    <div ng-show="!isNewsLoaded" class="loadingWrapper">
+                        <div class="loadingGear"></div>
+                    </div>
+
+                    <div ng-show="isNewsLoaded">
+
+                    <span ng-if="threads.length === 0">
+                        There are no announcements yet.
+                    </span>
+                        <ul ng-if="threads.length > 0">
+                            <li ng-repeat="forumThread in threads">
+                                <div class="newsb-thumbnail">
+                                    <a ng-href="http://www.gunzfactor.com/showthread.php?t={{forumThread.Id}}"
+                                       target="_blank">
+
+                                        <img ng-src="{{forumThread.AvatarUrl ? 'http://gunzfactor.com/' + forumThread.AvatarUrl : '/img/user-placeholder.png'}}">
+                                    </a>
+                                </div>
+
+                                <h4>
+                                    <a ng-href="http://www.gunzfactor.com/showthread.php?t={{forumThread.Id}}">{{forumThread.Name}}</a>
+                                </h4>
+
+                                <p class="description">{{forumThread.Post}}</p>
+
+                                <div class="post-meta">
+                                    <i class="icon-user"></i> <span class="username" ng-bind-html="renderHtml(forumThread.Username)"></span> - <i class="icon-calendar"></i>
+                                    {{forumThread.Date}} -
+                                    <div class="rating r-5"></div>
+                                </div>
+
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="block first threads" ng-cloak>
+                <div class="title-wrapper">
+                    <h3 class="widget-title"> Discussions</h3>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+
+                    <div ng-show="!isGunzLoaded" class="loadingWrapper">
+                        <div class="loadingGear"></div>
+                    </div>
+
+                    <div ng-show="isGunzLoaded">
+
+                    <span ng-if="gunzThreads.length === 0">
+                        There are no announcements yet.
+                    </span>
+                        <ul ng-if="gunzThreads.length > 0">
+                            <li ng-repeat="forumThread in gunzThreads">
+                                <div class="newsb-thumbnail">
+                                    <a ng-href="http://www.gunzfactor.com/showthread.php?t={{forumThread.Id}}"
+                                       target="_blank">
+
+                                        <img ng-src="{{forumThread.AvatarUrl ? 'http://gunzfactor.com/' + forumThread.AvatarUrl : '/img/user-placeholder.png'}}">
+                                    </a>
+                                </div>
+
+                                <h4>
+                                    <a ng-href="http://www.gunzfactor.com/showthread.php?t={{forumThread.Id}}">{{forumThread.Name}}</a>
+                                </h4>
+
+                                <p class="description">{{forumThread.Post}}</p>
+
+                                <div class="post-meta">
+                                    <i class="icon-user"></i> <span class="username" ng-bind-html="renderHtml(forumThread.Username)"></span> - <i class="icon-calendar"></i>
+                                    {{forumThread.Date}} -
+                                    <div class="rating r-5"></div>
+                                </div>
+
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Sidebar -->
+        <div class="span4">
+            <div class="block first sidebar">
+
+                <account control="accountControl" ng-cloak></account>
+
+                <itemoftheday control="itemOfTheDayControl"
+                              onpurchase="onItemOftheDayPurchase" ng-cloak></itemoftheday>
+
+                <statistics ng-cloak></statistics>
+
+                <download ng-cloak></download>
+
+                <!--  <div id="donateProgress" class="widget">
+                      <div class="title-wrapper">
+                          <h3 class="widget-title">Donate progress</h3>
+
+                          <div class="clear"></div>
+                      </div>
+                      <div class="wcontainer">
+                          <p class="donateTitle">Help us to reach our goal!</p>
+
+                          <hr/>
+
+                          <p class="description">
+                              In order to keep the server running we require donations to pay the
+                              server. These donations are not for personal benefit.
+                              They will be only used in order to maintain the server.
+                          </p>
+
+                          <div id="noDonations" ng-if="donate.progress === 0">There are donations yet</div>
+
+                          <div ng-if="donate.progress > 0" class="progress">
+                              <div class="bar bar-warning progress-striped" style="width: {{donate.progress}}%;"></div>
+                          </div>
+
+                          <div id="currentDonation">Current donation: <span class="current">${{donate.current}}</span>
+                          </div>
+                          <div id="border">|</div>
+                          <div id="requiredDonation">Required donation: <span class="current">${{donate.goal}}</span>
+                          </div>
+
+                          <div class="clear"></div>
+                      </div>
+                  </div>-->
+
+                <div id="facebook" class="widget" ng-cloak>
+                    <div class="title-wrapper">
+                        <h3 class="widget-title">Find us on facebook!</h3>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wcontainer">
+
+                        <div ng-show="!isFacebookLoaded" class="loadingWrapper">
+                            <div class="loadingGear"></div>
+                        </div>
+
+                        <div ng-show="isFacebookLoaded">
+                            <div class="fb-page" data-href="https://www.facebook.com/Gunzfactorcom-468010233300292/"
+                                 data-small-header="true"
+                                 data-width="300" data-hide-cover="false"
+                                 data-show-facepile="true" data-show-posts="true">
+                                <div class="fb-xfbml-parse-ignore">
+                                    <blockquote cite="https://www.facebook.com/Gunzfactorcom-468010233300292/">
+                                        <a href="https://www.facebook.com/Gunzfactorcom-468010233300292/">GunzFactor</a>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,363 @@
+#character #main {
+    margin-top: 20px;
+}
+
+#character #statistics .wcontainer {
+    padding: 0;
+}
+
+#character #statistics ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#character #statistics li {
+    padding: 10px 20px;
+    border: 0;
+}
+
+    #character #statistics li:first-child {
+        border-top: 0 !important;
+    }
+
+    #character #statistics li:nth-child(odd) {
+        background: #343434;
+        -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, .2);
+        -moz-box-shadow: inset 0 1px 1px rgba(255, 255, 255, .2);
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, .2);
+    }
+
+    #character #statistics li:nth-child(even) {
+        background: #1B1D21;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
+
+    #character #statistics li .subject {
+        color: #999;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 13px;
+        margin-right: 3px;
+    }
+
+    #character #statistics li .detail {
+        color: #ccc;
+        font-size: 13px;
+    }
+
+    #character #skills #addSkill{
+        margin-top: 10px;
+    }
+
+#character #skills .skill {
+    margin: 5px 10px 0 0;
+    padding: 5px 14px;
+    background-image: linear-gradient(to top, #343434, #212528);
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 4px;
+    float: left;
+    position: relative;
+}
+
+#character #skills .skill .fa{
+    position: absolute;
+    right: 3px;
+    font-size: 9px;
+    color: #BDBBBB;
+    cursor: pointer;
+}
+
+    #character #skills .skill::before {
+        content: "";
+        color: #fff;
+        background-color: #fff;
+        height: 5px;
+        width: 5px;
+        display: block;
+        border-radius: 50%;
+        top: 12px;
+        position: absolute;
+    }
+
+    #character #skills .skill .name {
+        margin-left: 12px;
+    }
+
+#character #skills .wcontainer {
+    padding-top: 15px;
+}
+
+#character #lastMatches .map {
+    float: left;
+    margin-right: 10px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+    #character #lastMatches .map img {
+        width: 125px;
+        height: auto;
+    }
+
+#character #lastMatches .info .title {
+    font-weight: bold;
+    color: #1E8A22;
+    font-size: 15px;
+    margin: 0;
+    height: auto;
+    position: static;
+}
+
+#character #lastMatches .info .scores {
+    position: static;
+    float: none;
+    width: auto;
+    display: inline-block;
+}
+
+#character #lastMatches .info .win {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000;
+    position: relative;
+    left: 2px;
+}
+
+#character #lastMatches .info hr {
+    margin: 5.5px 0 9.5px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+#character #lastMatches .info .mapName {
+    float: right;
+    font-size: 10px;
+    color: #A9A7A7;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+#character #lastMatches li {
+    padding: 20px 0 0 0 !important;
+    border-top: 1px solid #B7B5B5;
+    margin-top: 20px;
+}
+
+    #character #lastMatches li:first-child {
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0 !important;
+    }
+
+    #character #lastMatches li:last-child {
+        padding-bottom: 10px;
+    }
+
+#character #latestFriends ul {
+    margin: 0;
+    padding: 0;
+}
+
+#character #latestFriends li img {
+    float: left;
+    margin-right: 10px;
+    border: 1px solid #000;
+    width: 28px;
+    height: auto;
+    background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: linear-gradient(to top, #1a1b1f, #212528);
+    -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    padding: 5px;
+}
+
+#character #latestFriends li .username {
+    color: #1E8A22;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#character #latestFriends li .online {
+    color: green;
+    font-size: 10px;
+}
+
+#character #latestFriends li .offline {
+    color: #AD0000;
+    font-size: 10px;
+}
+
+#character #latestFriends li .clan {
+    margin-left: 1px;
+    color: #888;
+    font-size: 9px;
+    font-style: italic;
+    position: relative;
+    bottom: 1px;
+}
+
+#character #clanwar li {
+    float: left;
+    margin-left: 5px;
+    padding: 0;
+    border: 0;
+}
+
+#character #clanwar li img{
+    height: 25px;
+}
+
+    #character #clanwar li:first-child {
+        margin-left: 0;
+    }
+
+#character #clanwar .date {
+    display: block;
+    width: 100%;
+    color: #6B6868;
+}
+
+#character #clanwar .clanwar-list > li {
+    font-size: 11px;
+    position: relative;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+    #character #clanwar .clanwar-list > li:first-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+    }
+
+#character #clanwar .players li::before {
+    content: '>';
+    color: #000;
+    position: absolute;
+    font-weight: bold;
+}
+
+#character #clanwar .players li .player {
+    margin-left: 10px;
+}
+
+#character #clanwar .myScore {
+    float: left;
+    width: 100%;
+    color: #6B6868;
+    font-size: 10px;
+}
+
+    #character #clanwar .myScore span {
+        color: #6B6868;
+    }
+
+    #character #clanwar .myScore span {
+        font-size: 10px;
+    }
+
+    #character #clanwar .myScore .detail {
+        color: #777;
+    }
+
+#character #clanwar li .wrap {
+    padding: 0;
+}
+
+#character #comments li img {
+    float: left;
+    width: 38px;
+    height: 38px;
+    margin-right: 15px;
+    padding: 8px;
+    -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    border: 1px solid #000;
+    background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: linear-gradient(to top, #1a1b1f, #212528);
+}
+
+
+#character #comments textarea {
+    width: 94% !important;
+}
+
+
+@media (max-width: 480px) {
+    #character #comments textarea {
+        width: 100% !important;
+    }
+
+    #character #comments #respond input[type="submit"] {
+        margin-left: 0px;
+    }
+}
+
+#character #comments #loadMore {
+    padding: 7px 20px 7px 20px !important;
+    background-color: #CECECE !important;
+}
+
+#character #comments li .comment-body {
+    float: none;
+    width: 100%;
+}
+
+#character #levelUp .wcontainer {
+    background-color: #fff;
+}
+
+#character #levelUp .level {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 32px;
+    color: rgb(212, 21, 21);
+    text-shadow: 1px 1px 2px #000;
+    float: left;
+    width: 35px;
+}
+
+#character #levelUp .arrow{
+    background-image: url('/img/arrow-right.png');
+    margin-left: 15px;
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+
+#character #levelUp .date .info {
+    position: relative;
+    top: 1px;
+}
+
+#character #levelUp li {
+    padding: 15px 10px 15px 0px;
+}
+
+    #character #levelUp li:first-child {
+        padding-top: 0;
+    }
+
+    #character #levelUp li:last-child {
+        padding-bottom: 0;
+    }
+
+#character #comments .comment-body .comment-author {
+    color: #000000;
+}
+
+#character #introductionAlert {
+    display: none;
+}

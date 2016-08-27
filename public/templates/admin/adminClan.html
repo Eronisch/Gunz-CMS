@@ -1,0 +1,55 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminClan" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Admin administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+            <input type="text" class="form-control" placeholder="Name, owner..." ng-model="searchText"
+                   ng-change="search()"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Avatar</th>
+                    <th>Name</th>
+                    <th>Id</th>
+                    <th>Points</th>
+                    <th>Owner</th>
+                    <th>Wins</th>
+                    <th>Draws</th>
+                    <th>Losses</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="clan in clans">
+                    <td>
+                        <img ng-if="clan.EmblemUrl" ng-src="{{clan.EmblemUrl}}" width="24px"/>
+                        <span ng-if="!clan.EmblemUrl">None</span>
+                    <td>{{clan.Name}}</td>
+                    <td>{{clan.Clid}}</td>
+                    <td>{{clan.Point}}</td>
+                    <td>{{clan.Owner.Name}}</td>
+                    <td>{{clan.Wins}}</td>
+                    <td>{{clan.Draws}}</td>
+                    <td>{{clan.Losses}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div class="viewing pull-left">
+                    Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amount}}
+                </div>
+
+                <div class="pagination pull-right"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<link href="/css/adminClan.css" rel="stylesheet"/>

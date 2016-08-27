@@ -1,0 +1,152 @@
+#clanPage #members {
+    margin-bottom: 40px;
+}
+
+#clanPage #admins ul {
+    list-style: none;
+}
+
+#clanPage #admins li {
+    padding-bottom: 10px;
+}
+
+    #clanPage #admins li:last-child {
+        padding-bottom: 0;
+    }
+
+    #clanPage #admins li .username {
+        color: #A20E06;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    #clanPage #admins li img {
+        float: left;
+        height: 25px;
+        width: auto;
+        padding: 4px;
+        margin-right: 15px;
+        -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+        -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+        box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+        border: 1px solid #000;
+        background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+        background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+        background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+        background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+        background-image: linear-gradient(to top, #1a1b1f, #212528);
+    }
+
+    #clanPage #admins li .leader {
+        color: #3B5998;
+    }
+
+    #clanPage #admins li a {
+        display: block;
+    }
+
+    #clanPage #admins li .online, #clanPage #admins li .offline {
+        margin: 0;
+        padding: 0;
+        min-height: 0;
+        font-size: 10px;
+    }
+
+    #clanPage #admins li .online {
+        color: green;
+    }
+
+    #clanPage #admins li .offline {
+        color: #AD0000;
+    }
+
+#clanPage #comments li img {
+    float: left;
+    width: auto;
+    height: 38px;
+    margin-right: 15px;
+    padding: 8px;
+    -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    border: 1px solid #000;
+    background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: linear-gradient(to top, #1a1b1f, #212528);
+}
+
+
+#clanPage #comments textarea {
+    width: 94% !important;
+}
+
+#clanPage #comments .comment-author{
+    color: #4c4c4c;
+}
+
+
+@media (max-width: 480px) {
+    #clanPage #comments textarea {
+        width: 100% !important;
+    }
+
+    #clanPage #comments #respond input[type="submit"] {
+        margin-left: 0px;
+    }
+}
+
+#clanPage #comments #loadMore {
+    padding: 7px 20px 7px 20px !important;
+    background-color: #CECECE !important;
+}
+
+#clanPage #comments li .comment-body {
+    float: none;
+    width: 100%;
+}
+
+#clanPage #matches li:first-child .wrap {
+    padding-top: 0;
+}
+
+#clanPage #matches li:last-child .wrap {
+    padding-bottom: 0;
+}
+
+#clanPage #matches img {
+    height: 25px;
+    width: auto;
+    border: 0;
+}
+
+#clanPage #matches .players li::before {
+    content: '>';
+    color: #000;
+    position: absolute;
+    font-weight: bold;
+}
+
+#clanPage #matches .players li .player {
+    margin-left: 10px;
+}
+
+#clanPage .clanwar-list .date {
+    float: none;
+}
+
+#clanPage .players {
+    font-size: 11px;
+}
+
+    #clanPage .players li {
+        float: left;
+        margin-left: 5px;
+        padding: 0;
+        border: 0;
+    }
+
+#clanPage #main {
+    margin-top: 25px;
+}

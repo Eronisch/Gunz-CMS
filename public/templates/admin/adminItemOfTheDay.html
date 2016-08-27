@@ -1,0 +1,292 @@
+<breadcrumbs ng-attr-title="breadcrumbs.title" ng-attr-links="breadcrumbs.links"></breadcrumbs>
+
+<div id="adminItemOfTheDay" class="page normal-page container">
+    <div class="widget">
+        <div class="title-wrapper">
+            <h3 class="widget-title">Admin administration</h3>
+
+            <div class="clear"></div>
+        </div>
+        <div class="wcontainer">
+            <div>
+                <button class="pull-right button-extrasmall" ng-click="openAddItemOfTheDayModal()">Add item of the day
+                </button>
+            </div>
+            <input type="text" class="form-control search" placeholder="Name..." ng-model="searchText"
+                   ng-change="search()"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Limitation</th>
+                    <th>Purchased amount</th>
+                    <th>Stock</th>
+                    <th>Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in items">
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Description}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td>{{item.LimitAmount ? item.LimitAmount : '∞'}}</td>
+                    <td>{{item.PurchasedAmount}}</td>
+                    <td>{{item.LimitAmount ? (item.LimitAmount - item.PurchasedAmount): '∞'}}</td>
+                    <td>{{item.Date}}</td>
+                    <td>
+                        <button class="btn btn-default btn-xs" ng-click="openEditItemOfTheDayModal(item)">Edit</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-xs" ng-click="openDeleteItemOfTheDayModal(item)">Delete
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div class="viewing pull-left">
+                    Viewing {{viewingMinimum}} - {{viewingMaximum}} of {{amount}}
+                </div>
+
+                <div class="pagination pull-right"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <modal id="deleteItemOfTheDayModal" title="Delete item">
+        <div class="control-group">
+            Are you sure you want to delete the following item: {{deleteItem.deleteModel.name}} from:
+            {{deleteItem.deleteModel.date}}?
+        </div>
+
+        <button ng-disabled="deleteItem.isLoading" ng-click="deleteItemRecord()" class="btn btn-default">Delete</button>
+    </modal>
+
+    <modal id="addItemOfTheDayModal" title="Add item">
+        <form ng-submit="addItemRecord()">
+            <div class="control-group">
+                <label>Name</label>
+                <input type="text" ng-model="addItem.addModel.name" placeholder="Name..." required ng-maxlength="50"/>
+            </div>
+
+            <div class="control-group">
+                <label>Description</label>
+                <input type="text" ng-model="addItem.addModel.description" placeholder="Description..." required
+                       ng-maxlength="500"/>
+            </div>
+
+            <div class="control-group">
+                <label>Item ID</label>
+                <input type="number" ng-model="addItem.addModel.itemId" placeholder="Item id..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Quantity</label>
+                <input type="number" ng-model="addItem.addModel.quantity" placeholder="Quantity..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Damage</label>
+                <input type="number" ng-model="addItem.addModel.damage" placeholder="Damage..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Delay</label>
+                <input type="number" ng-model="addItem.addModel.delay" placeholder="Delay..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Magazine</label>
+                <input type="number" ng-model="addItem.addModel.magazine" placeholder="Magazine..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Max bullet</label>
+                <input type="number" ng-model="addItem.addModel.maxBullet" placeholder="Max bullet..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Max weight</label>
+                <input type="number" ng-model="addItem.addModel.maxWeight" placeholder="Max weight..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Weight</label>
+                <input type="number" ng-model="addItem.addModel.weight" placeholder="Weight..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Reload time (ms)</label>
+                <input type="number" ng-model="addItem.addModel.reloadTime" placeholder="Reload time..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Hp</label>
+                <input type="number" ng-model="addItem.addModel.hp" placeholder="Hp..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Sex</label>
+                <select ng-model="addItem.addModel.sex">
+                    <option value="">Unisex</option>
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Thirty day price</label>
+                <input type="number" ng-model="addItem.addModel.thirtyDayPrice" placeholder="Thirty day price..."
+                       required/>
+            </div>
+
+            <div class="control-group">
+                <label>Sixty day price</label>
+                <input type="number" ng-model="addItem.addModel.sixtyDayPrice" placeholder="Sixty day price..."
+                       required/>
+            </div>
+
+            <div class="control-group">
+                <label>Unlimited price (optional)</label>
+                <input type="number" ng-model="addItem.addModel.unlimitedPrice" placeholder="Unlimited price..."/>
+            </div>
+
+            <div class="control-group">
+                <label>Limit purchase amount (optional)</label>
+                <input type="number" ng-model="addItem.addModel.limitAmount" placeholder="Limit..."/>
+            </div>
+
+            <div class="control-group">
+                <label>Date</label>
+                <input type="text" ng-model="addItem.addModel.date" placeholder="YYYY-MM-dd" required/>
+            </div>
+
+            <div class="control-group">
+                <label>Image</label>
+                <input id="fileImage" type="file" on-file-upload-change="onAddImageChange" required/>
+            </div>
+
+            <input type="submit" ng-disabled="addItem.isLoading" class="btn btn-default" value="Add item"/>
+        </form>
+    </modal>
+
+    <modal id="editItemOfTheDayModal" title="Edit item">
+        <form ng-submit="editItemRecord()">
+
+            <input type="hidden" ng-model="editItem.editModel.id"/>
+
+            <div class="control-group">
+                <label>Name</label>
+                <input type="text" ng-model="editItem.editModel.name" placeholder="Name..." required ng-maxlength="50"/>
+            </div>
+
+            <div class="control-group">
+                <label>Description</label>
+                <input type="text" ng-model="editItem.editModel.description" placeholder="Description..." required
+                       ng-maxlength="500"/>
+            </div>
+
+            <div class="control-group">
+                <label>Item ID</label>
+                <input type="number" ng-model="editItem.editModel.itemId" placeholder="Item id..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Quantity</label>
+                <input type="number" ng-model="editItem.editModel.quantity" placeholder="Quantity..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Damage</label>
+                <input type="number" ng-model="editItem.editModel.damage" placeholder="Damage..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Delay</label>
+                <input type="number" ng-model="editItem.editModel.delay" placeholder="Delay..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Magazine</label>
+                <input type="number" ng-model="editItem.editModel.magazine" placeholder="Magazine..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Max bullet</label>
+                <input type="number" ng-model="editItem.editModel.maxBullet" placeholder="Max bullet..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Max weight</label>
+                <input type="number" ng-model="editItem.editModel.maxWeight" placeholder="Max weight..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Weight</label>
+                <input type="number" ng-model="editItem.editModel.weight" placeholder="Weight..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Reload time (ms)</label>
+                <input type="number" ng-model="editItem.editModel.reloadTime" placeholder="Reload time..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Hp</label>
+                <input type="number" ng-model="editItem.editModel.hp" placeholder="Hp..." required/>
+            </div>
+
+            <div class="control-group">
+                <label>Sex</label>
+                <select ng-model="editItem.editModel.sex">
+                    <option value="" ng-selected="editItem.editModel.sex === null">Unisex</option>
+                    <option value="0" ng-selected="editItem.editModel.sex === 0">Male</option>
+                    <option value="1" ng-selected="editItem.editModel.sex === 1">Female</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Thirty day price</label>
+                <input type="number" ng-model="editItem.editModel.thirtyDayPrice" placeholder="Thirty day price..."
+                       required/>
+            </div>
+
+            <div class="control-group">
+                <label>Sixty day price</label>
+                <input type="number" ng-model="editItem.editModel.sixtyDayPrice" placeholder="Sixty day price..."
+                       required/>
+            </div>
+
+            <div class="control-group">
+                <label>Unlimited price (optional)</label>
+                <input type="number" ng-model="editItem.editModel.unlimitedPrice" placeholder="Unlimited price..."/>
+            </div>
+
+            <div class="control-group">
+                <label>Limit purchase amount (not required)</label>
+                <input type="number" ng-model="editItem.editModel.limitAmount" placeholder="Limit..."/>
+            </div>
+
+            <div class="control-group">
+                <label>Date</label>
+                <input type="text" ng-model="editItem.editModel.date" placeholder="YYYY-MM-dd" required/>
+            </div>
+
+            <div class="control-group">
+                <label>Image (leave empty if you wish to keep the old image)</label>
+                <input type="file" ng-model="editItem.editModel.image" on-file-upload-change="onEditImageChange"/>
+            </div>
+
+            <input type="submit" ng-disabled="addItem.isLoading" class="btn btn-default" value="Edit item"/>
+        </form>
+    </modal>
+
+</div>
+
+<link href="/css/adminItemOfTheDay.css" rel="stylesheet"/>

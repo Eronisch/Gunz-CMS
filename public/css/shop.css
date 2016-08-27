@@ -1,0 +1,91 @@
+﻿#donatorShop #shopCategories {
+    border-bottom: 1px solid #DDDCDC;
+}
+
+    #donatorShop #shopCategories li {
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+#donatorShop .item {
+    -webkit-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    box-shadow: 0 1px 4px #000, inset 0 1px 1px rgba(255, 255, 255, .2);
+    border: 1px solid #000;
+    background-image: -webkit-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -moz-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -o-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: -ms-linear-gradient(bottom, #1a1b1f, #212528);
+    background-image: linear-gradient(to top, #1a1b1f, #212528);
+    padding: 12px;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+    #donatorShop .item img {
+        border: 1px solid #232323;
+        height: 120px;
+        width: auto;
+        padding: 6px;
+        border-radius: 8px;
+        background-color: #0F1215;
+        box-sizing: border-box;
+    }
+
+    #donatorShop .item .name {
+        color: #fff;
+        text-shadow: 1px 1px #000;
+        margin-top: 5px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+    }
+
+    #donatorShop .item hr {
+        margin: 10px 0;
+        padding: 0;
+        border-top: 1px solid #3C3C3C;
+    }
+
+#donatorShop .fa.fa-money {
+    color: #18841C;
+    margin-right: 3px;
+    font-size: 14px;
+}
+
+#donatorShop .item .price .coins {
+    color: #fff;
+    text-shadow: 1px 1px #000;
+    position: relative;
+    bottom: 1px;
+}
+
+    #donatorShop .item .price .coins .oldPrice {
+        color: red;
+        text-decoration: line-through;
+    }
+
+#donatorShop .item .buy {
+    font-size: 9px;
+    padding: 4px 14px 4px 12px;
+}
+
+#donatorShop .item:nth-child(4n + 5) {
+    margin-left: 0;
+}
+
+#donatorShop #selectSex{
+    margin: 0;
+}
+
+#donatorShop #selectSex select{
+    margin: 0;
+    width: 100%;
+}
+
+#donatorShop .pagination{
+    margin: 20px 0 0 0;
+    line-height:0;
+}
